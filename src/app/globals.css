@@ -1,0 +1,596 @@
+@import "tailwindcss";
+
+:root {
+  --background: #080b09;
+  --foreground: #f5f7f4;
+  --surface: #101510;
+  --surface-light: #171e17;
+  --lime: #b9f56b;
+  --cyan: #55e6dc;
+  --muted: #929b91;
+  --border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+::selection {
+  color: #10160b;
+  background: var(--lime);
+}
+
+:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 3px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font-size: inherit;
+}
+
+.container-vignify {
+  width: min(100% - 40px, 1280px);
+  margin-inline: auto;
+}
+
+.text-gradient {
+  background: linear-gradient(100deg, var(--lime), var(--cyan));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.surface-card {
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.025);
+  backdrop-filter: blur(16px);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* Shared Vignify interactive button and link animation */
+
+.vignify-interactive {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.7rem 1rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  text-align: center;
+  transition:
+    transform 300ms ease-out,
+    border-color 300ms ease-out,
+    background-color 300ms ease-out,
+    color 300ms ease-out,
+    box-shadow 300ms ease-out;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.vignify-interactive:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: rgba(185, 245, 107, 0.7);
+  background: rgba(185, 245, 107, 0.1);
+  color: var(--lime);
+  box-shadow: 0 0 20px rgba(185, 245, 107, 0.12);
+}
+
+.vignify-interactive:active:not(:disabled) {
+  transform: translateY(0) scale(0.96);
+}
+
+.vignify-interactive:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 3px;
+}
+
+.vignify-button-icon,
+.vignify-button-icon-right {
+  display: inline-block;
+  flex-shrink: 0;
+  transition: transform 300ms ease-out;
+}
+
+.vignify-interactive:hover .vignify-button-icon {
+  transform: translateX(-4px);
+}
+
+.vignify-interactive:hover .vignify-button-icon-right {
+  transform: translateX(4px);
+}
+
+/* Primary CTA */
+
+.vignify-button-primary {
+  border-color: var(--lime);
+  background: var(--lime);
+  color: #10160b;
+  font-weight: 700;
+}
+
+.vignify-button-primary:hover:not(:disabled) {
+  border-color: #caff87;
+  background: #caff87;
+  color: #10160b;
+  box-shadow: 0 0 24px rgba(185, 245, 107, 0.2);
+}
+
+/* Subtle ghost action */
+
+.vignify-button-ghost {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.025);
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* Small filter and category chips */
+
+.vignify-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.025);
+  padding: 0.55rem 0.9rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.8125rem;
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease,
+    color 220ms ease;
+}
+
+.vignify-chip:hover {
+  transform: translateY(-1px);
+  border-color: rgba(185, 245, 107, 0.45);
+  background: rgba(185, 245, 107, 0.07);
+  color: var(--lime);
+}
+
+.vignify-chip-active {
+  border-color: rgba(185, 245, 107, 0.6);
+  background: rgba(185, 245, 107, 0.12);
+  color: var(--lime);
+}
+
+/* Cards */
+
+.vignify-card {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.025);
+  transition:
+    transform 300ms ease,
+    border-color 300ms ease,
+    box-shadow 300ms ease,
+    background-color 300ms ease;
+}
+
+.vignify-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(185, 245, 107, 0.3);
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Form controls */
+
+.vignify-input {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.8rem 1rem;
+  color: white;
+  outline: none;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.vignify-input::placeholder {
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.vignify-input:focus {
+  border-color: rgba(185, 245, 107, 0.65);
+  box-shadow: 0 0 0 3px rgba(185, 245, 107, 0.08);
+}
+
+.vignify-input option {
+  background: #101510;
+  color: white;
+}
+
+/* Background ambient effects */
+
+.vignify-glow {
+  pointer-events: none;
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(100px);
+  opacity: 0.12;
+}
+
+@keyframes vignify-float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.vignify-float {
+  animation: vignify-float 6s ease-in-out infinite;
+}
+
+@media (max-width: 640px) {
+  .container-vignify {
+    width: min(100% - 28px, 1280px);
+  }
+
+  .vignify-interactive {
+    padding: 0.65rem 0.85rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .vignify-interactive:hover,
+  .vignify-interactive:active,
+  .vignify-card:hover,
+  .vignify-chip:hover {
+    transform: none;
+  }
+}
+
+
+/* Vignify authentication experience */
+
+.v-auth {
+  isolation: isolate;
+}
+
+.v-auth-ambient {
+  position: absolute;
+  inset: -20%;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 15% 20%, rgb(85 230 220 / 12%), transparent 32%),
+    radial-gradient(ellipse at 80% 15%, rgb(185 245 107 / 15%), transparent 30%),
+    radial-gradient(ellipse at 70% 85%, rgb(25 95 76 / 22%), transparent 34%);
+  animation: v-auth-ambient-drift 16s ease-in-out infinite alternate;
+}
+
+.v-auth-grid {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.13;
+  background-image: radial-gradient(rgb(255 255 255 / 24%) 0.7px, transparent 0.7px);
+  background-size: 27px 27px;
+  mask-image: linear-gradient(to bottom, black, transparent 85%);
+}
+
+.v-auth-glass {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgb(190 255 211 / 18%);
+  background: linear-gradient(145deg,
+      rgb(255 255 255 / 7%),
+      rgb(255 255 255 / 2%) 45%,
+      rgb(16 46 37 / 17%));
+  box-shadow:
+    0 30px 100px rgb(0 0 0 / 38%),
+    inset 0 1px rgb(255 255 255 / 5%);
+  backdrop-filter: blur(24px);
+}
+
+.v-auth-glass::before {
+  position: absolute;
+  inset: 0 15% auto;
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg, transparent, #b9f56b90, transparent);
+}
+
+.v-auth-form-enter {
+  animation: v-auth-enter 700ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+.v-auth-orb {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(1px);
+  pointer-events: none;
+}
+
+.v-auth-orb-one {
+  top: 20%;
+  right: -90px;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle at 35% 30%, #d7ff91, #8ddc49 22%, #2a8e6b 52%, transparent 72%);
+  opacity: 0.65;
+  animation: v-auth-float 9s ease-in-out infinite;
+}
+
+.v-auth-orb-two {
+  bottom: 7%;
+  left: -110px;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle at 40% 30%, #7affdf, #159b80 30%, transparent 72%);
+  opacity: 0.42;
+  animation: v-auth-float 12s ease-in-out infinite reverse;
+}
+
+.v-auth-orbit {
+  position: absolute;
+  top: 40%;
+  left: 7%;
+  width: 75%;
+  height: 180px;
+  border: 1px solid rgb(85 230 220 / 50%);
+  border-radius: 50%;
+  transform: rotate(-22deg);
+  box-shadow: 0 0 25px rgb(85 230 220 / 10%);
+  animation: v-auth-orbit 12s linear infinite;
+}
+
+.v-auth-art-card {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(178 255 224 / 35%);
+  border-radius: 26px;
+  background: linear-gradient(140deg, rgb(85 230 220 / 22%), rgb(6 22 21 / 80%));
+  box-shadow:
+    0 20px 60px rgb(0 0 0 / 35%),
+    inset 0 1px rgb(255 255 255 / 18%),
+    0 0 35px rgb(85 230 220 / 9%);
+  backdrop-filter: blur(12px);
+}
+
+.v-auth-art-card-back {
+  top: 10px;
+  left: 10%;
+  width: 155px;
+  height: 125px;
+  color: #55e6dc;
+  font-size: 60px;
+  transform: rotate(-11deg);
+  animation: v-auth-float 7s ease-in-out infinite;
+}
+
+.v-auth-art-card-front {
+  top: 48px;
+  left: 34%;
+  width: 170px;
+  height: 130px;
+  color: #b9f56b;
+  font-size: 76px;
+  transform: rotate(8deg);
+  animation: v-auth-float 8s ease-in-out infinite reverse;
+}
+
+.v-auth-art-chip {
+  position: absolute;
+  top: 15px;
+  right: 14%;
+  display: grid;
+  width: 43px;
+  height: 43px;
+  place-items: center;
+  border: 1px solid rgb(185 245 107 / 50%);
+  border-radius: 15px;
+  background: #b9f56b;
+  color: #08100b;
+  font-size: 23px;
+  box-shadow: 0 0 28px rgb(185 245 107 / 30%);
+  animation: v-auth-float 5s ease-in-out infinite;
+}
+
+.v-auth-art-chip-two {
+  top: 125px;
+  right: 9%;
+  width: 34px;
+  height: 34px;
+  background: rgb(85 230 220 / 15%);
+  color: #55e6dc;
+  font-size: 17px;
+}
+
+.v-auth :is(input[type="text"], input[type="email"], input[type="password"]) {
+  transition:
+    border-color 220ms ease,
+    background-color 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms ease;
+}
+
+.v-auth :is(input[type="text"], input[type="email"], input[type="password"]):focus {
+  border-color: rgb(185 245 107 / 65%);
+  background-color: rgb(185 245 107 / 4%);
+  box-shadow: 0 0 0 3px rgb(185 245 107 / 8%), 0 0 22px rgb(185 245 107 / 5%);
+  outline: none;
+}
+
+.v-auth :is(button, a) {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.v-auth button[type="submit"] {
+  position: relative;
+  overflow: hidden;
+  min-height: 51px;
+  border: 1px solid rgb(255 255 255 / 15%);
+  border-radius: 13px;
+  background: linear-gradient(105deg, #b9f56b 0%, #d3ff81 48%, #55e6dc 100%);
+  background-size: 180% 100%;
+  color: #061009;
+  font-weight: 750;
+  box-shadow: 0 7px 28px rgb(185 245 107 / 12%);
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    background-position 350ms ease;
+}
+
+.v-auth button[type="submit"]:hover {
+  transform: translateY(-2px);
+  background-position: 100% 50%;
+  box-shadow: 0 10px 34px rgb(85 230 220 / 20%);
+}
+
+.v-auth button[type="submit"]:active {
+  transform: translateY(0) scale(0.99);
+}
+
+.v-auth a,
+.v-auth button {
+  transition-timing-function: ease;
+}
+
+@keyframes v-auth-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0) scale(0.99);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes v-auth-float {
+
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -12px;
+  }
+}
+
+@keyframes v-auth-orbit {
+  from {
+    rotate: 0deg;
+  }
+
+  to {
+    rotate: 360deg;
+  }
+}
+
+@keyframes v-auth-ambient-drift {
+  from {
+    transform: translate3d(-1%, -1%, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(2%, 2%, 0) scale(1.06);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .v-auth *,
+  .v-auth *::before,
+  .v-auth *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
