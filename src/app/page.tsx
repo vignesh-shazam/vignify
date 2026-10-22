@@ -142,10 +142,10 @@ export default function HomePage() {
               Log in
             </Link>
             <Link
-              href="/signup"
+              href="/explore"
               className="vignify-interactive vignify-button-primary"
             >
-              Get started
+              Explore now
               <span className="vignify-button-icon-right">↗</span>
             </Link>
           </div>

@@ -63,6 +63,14 @@ export async function POST(request: Request) {
 
   try {
     const supabase = await createClient();
+    console.log("Registration diagnostics:", {
+      url: process.env.NEXT_PUBLIC_SUPABASE_URL?.trim(),
+      keyPrefix: process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+        ?.trim()
+        .slice(0, 15),
+      keyLength:
+        process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY?.trim().length,
+    });
 
     const { data, error } = await supabase.auth.signUp({
       email,
@@ -73,7 +81,11 @@ export async function POST(request: Request) {
     });
 
     if (error) {
-      console.error("Supabase registration failed:", error.message);
+      console.error("Supabase registration failed:", {
+        message: error.message,
+        status: error.status,
+        code: error.code,
+      });
 
       return NextResponse.json(
         { error: "Registration failed. Check your Supabase configuration and try again." },
