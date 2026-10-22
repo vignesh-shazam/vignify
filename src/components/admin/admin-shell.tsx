@@ -2,13 +2,17 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
+import type { LucideIcon } from "lucide-react";
 import {
   House, Image, Tags, PanelsTopLeft, GalleryVerticalEnd, UsersRound, ShieldAlert,
   MessageCircle, Bell, ChartNoAxesColumnIncreasing, ChartNoAxesCombined, BadgeCheck,
-  Wrench, ShieldCheck, Settings, Search, Sun, Moon, ChevronDown, LogOut, Menu, X,
+  Wrench, ShieldCheck, Settings, Search, Sun, Moon, LogOut, Menu,
 } from "lucide-react";
 
-const groups = [
+type NavItem = { label: string; href: string; icon: LucideIcon; soon?: boolean; notice?: boolean };
+type NavGroup = { label: string; items: NavItem[] };
+
+const groups: NavGroup[] = [
  { label:"", items:[{label:"Dashboard",href:"/admin",icon:House}] },
  { label:"CONTENT", items:[{label:"Wallpapers",href:"/admin/wallpapers",icon:Image},{label:"Categories & Tags",href:"/admin/categories",icon:Tags},{label:"Homepage & Featured",href:"/admin/featured",icon:PanelsTopLeft},{label:"Collections",href:"/admin/collections",icon:GalleryVerticalEnd}] },
  { label:"COMMUNITY", items:[{label:"Users & Creators",href:"/admin/users",icon:UsersRound},{label:"Reports & Moderation",href:"/admin/reports",icon:ShieldAlert},{label:"Support & Feedback",href:"/admin/support",icon:MessageCircle},{label:"Notifications",href:"/admin/notifications",icon:Bell,notice:true}] },

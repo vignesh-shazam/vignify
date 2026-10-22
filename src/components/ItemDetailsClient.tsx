@@ -1,11 +1,9 @@
-
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import {
-  customizationItems,
   formatPrice,
   getRelatedCustomizations,
   type CustomizationItem,
@@ -14,6 +12,41 @@ import {
 type Props = {
   item: CustomizationItem;
 };
+
+const FAVORITES_KEY = "vignify-favorites";
+const FAVORITES_EVENT = "vignify-favorites-updated";
+
+function readFavorites(): string[] {
+  if (typeof window === "undefined") {
+    return [];
+  }
+
+  try {
+    const value: unknown = JSON.parse(
+      window.localStorage.getItem(FAVORITES_KEY) ?? "[]",
+    );
+
+    return Array.isArray(value)
+      ? value.filter((id): id is string => typeof id === "string")
+      : [];
+  } catch {
+    return [];
+  }
+}
+
+function subscribeFavorites(callback: () => void) {
+  window.addEventListener("storage", callback);
+  window.addEventListener(FAVORITES_EVENT, callback);
+
+  return () => {
+    window.removeEventListener("storage", callback);
+    window.removeEventListener(FAVORITES_EVENT, callback);
+  };
+}
+
+function getServerFavorites(): string[] {
+  return [];
+}
 
 function Brand() {
   return (
@@ -33,44 +66,35 @@ function Brand() {
 }
 
 export default function ItemDetailsClient({ item }: Props) {
-  const [isFavorite, setIsFavorite] = useState(false);
   const [notice, setNotice] = useState("");
-  const [isShareSupported, setIsShareSupported] = useState(false);
 
-  useEffect(() => {
-    try {
-      const favorites = JSON.parse(
-        window.localStorage.getItem("vignify-favorites") ?? "[]",
-      ) as string[];
+  const favorites = useSyncExternalStore(
+    subscribeFavorites,
+    readFavorites,
+    getServerFavorites,
+  );
 
-      setIsFavorite(favorites.includes(item.id));
-    } catch {
-      setIsFavorite(false);
-    }
-
-    setIsShareSupported(Boolean(navigator.share));
-  }, [item.id]);
-
+  const isFavorite = favorites.includes(item.id);
   const relatedItems = getRelatedCustomizations(item, 4);
 
   function toggleFavorite() {
     try {
-      const favorites = JSON.parse(
-        window.localStorage.getItem("vignify-favorites") ?? "[]",
-      ) as string[];
+      const currentFavorites = readFavorites();
+      const currentlyFavorite = currentFavorites.includes(item.id);
 
-      const updatedFavorites = isFavorite
-        ? favorites.filter((id) => id !== item.id)
-        : [...new Set([...favorites, item.id])];
+      const updatedFavorites = currentlyFavorite
+        ? currentFavorites.filter((id) => id !== item.id)
+        : [...new Set([...currentFavorites, item.id])];
 
       window.localStorage.setItem(
-        "vignify-favorites",
+        FAVORITES_KEY,
         JSON.stringify(updatedFavorites),
       );
 
-      setIsFavorite(!isFavorite);
+      window.dispatchEvent(new Event(FAVORITES_EVENT));
+
       setNotice(
-        isFavorite
+        currentlyFavorite
           ? "Removed from your favorites."
           : "Added to your favorites.",
       );
@@ -95,7 +119,7 @@ export default function ItemDetailsClient({ item }: Props) {
     const url = window.location.href;
 
     try {
-      if (navigator.share) {
+      if (typeof navigator.share === "function") {
         await navigator.share({
           title: item.title,
           text: `Check out ${item.title} on Vignify.`,
@@ -212,6 +236,7 @@ export default function ItemDetailsClient({ item }: Props) {
 
             <div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.025] p-5">
               <p className="text-xs text-white/45">ITEM PRICE</p>
+
               <div className="mt-2 flex items-end justify-between gap-4">
                 <p className="text-3xl font-semibold tracking-tight">
                   {formatPrice(item.price)}
@@ -262,7 +287,7 @@ export default function ItemDetailsClient({ item }: Props) {
                 onClick={handleShare}
                 className="vignify-interactive mt-3 w-full"
               >
-                {isShareSupported ? "Share item" : "Copy item link"}
+                Share or copy item link
                 <span className="vignify-button-icon-right">↗</span>
               </button>
 
@@ -341,7 +366,9 @@ export default function ItemDetailsClient({ item }: Props) {
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
+
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
                 <span className="absolute bottom-3 right-3 rounded-full bg-black/50 px-2.5 py-1 text-xs font-semibold backdrop-blur-md">
                   {formatPrice(related.price)}
                 </span>

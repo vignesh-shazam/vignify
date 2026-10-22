@@ -1,43 +1,32 @@
-
 import Link from "next/link";
 
-export default function ItemNotFound() {
+export default function NotFound() {
   return (
-    <main className="relative isolate flex min-h-screen items-center justify-center overflow-hidden px-5">
-      <div className="vignify-glow -left-25 top-20 z-[-1] h-80 w-80 bg-[#B9F56B]" />
-
-      <div className="surface-card w-full max-w-lg p-8 text-center sm:p-12">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border border-[#B9F56B]/20 bg-[#B9F56B]/10 text-3xl text-[#B9F56B]">
-          ?
+    <main className="flex min-h-screen items-center justify-center bg-[#080b09] px-6 text-white">
+      <div className="w-full max-w-lg text-center">
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[#b9f56b] text-3xl font-black text-[#10160b]">
+          V
         </div>
 
-        <p className="mt-6 text-xs font-semibold tracking-[0.2em] text-[#B9F56B] uppercase">
-          ITEM NOT FOUND
+        <p className="mt-8 text-sm font-semibold uppercase tracking-[0.25em] text-[#b9f56b]">
+          Error 404
         </p>
 
-        <h1 className="mt-3 text-3xl font-semibold tracking-tight">
-          This vibe is missing.
+        <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
+          Lost your way?
         </h1>
 
-        <p className="mt-4 text-sm leading-6 text-white/50">
-          This item may no longer be available, or the link may be incorrect.
-          Explore the collection to find something else.
+        <p className="mx-auto mt-4 max-w-sm leading-7 text-white/60">
+          This page is not here yet. Let us get you back to discovering
+          something uniquely yours.
         </p>
 
-        <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-          <Link
-            href="/explore"
-            className="vignify-interactive vignify-button-primary"
-          >
-            Explore items
-            <span className="vignify-button-icon-right">↗</span>
-          </Link>
-
-          <Link href="/" className="vignify-interactive">
-            <span className="vignify-button-icon">←</span>
-            Back home
-          </Link>
-        </div>
+        <Link
+          href="/"
+          className="mt-8 inline-flex items-center justify-center rounded-full bg-[#b9f56b] px-6 py-3 font-semibold text-[#10160b] transition hover:bg-[#cdfb91] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#b9f56b]"
+        >
+          Back to Vignify
+        </Link>
       </div>
     </main>
   );

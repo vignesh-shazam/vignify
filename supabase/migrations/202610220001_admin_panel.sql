@@ -31,6 +31,27 @@ create policy "Anyone can view published wallpapers" on public.wallpapers
 for select to anon, authenticated
 using (status = 'published' and deleted_at is null);
 
+-- Private wallpaper objects are readable only by their creator, a trusted admin,
+-- or viewers of a published/non-deleted wallpaper. This preserves private storage.
+drop policy if exists "Owners admins and published viewers can read wallpaper objects" on storage.objects;
+create policy "Owners admins and published viewers can read wallpaper objects"
+on storage.objects
+for select to anon, authenticated
+using (
+  bucket_id = 'wallpapers'
+  and (
+    (storage.foldername(name))[1] = (select auth.uid())::text
+    or (select auth.jwt() -> 'app_metadata' ->> 'role') = 'admin'
+    or exists (
+      select 1
+      from public.wallpapers as w
+      where w.image_path = name
+        and w.status = 'published'
+        and w.deleted_at is null
+    )
+  )
+);
+
 -- Admin audit log reading is owner-only. No client INSERT/UPDATE/DELETE policies are added.
 create policy "Admins can read audit logs" on public.admin_audit_logs
 for select to authenticated

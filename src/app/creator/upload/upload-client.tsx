@@ -1,14 +1,14 @@
-
 "use client";
 
 import {
-  ChangeEvent,
-  DragEvent,
-  FormEvent,
+  type ChangeEvent,
+  type DragEvent,
+  type FormEvent,
   useEffect,
   useRef,
   useState,
 } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
   Bell,
@@ -90,9 +90,7 @@ export default function CreatorUploadClient({
   function chooseFile(next: File | undefined) {
     if (!next) return;
 
-    if (
-      !["image/jpeg", "image/png", "image/webp"].includes(next.type)
-    ) {
+    if (!["image/jpeg", "image/png", "image/webp"].includes(next.type)) {
       setStatus("Choose a JPG, PNG or WebP image.");
       return;
     }
@@ -123,9 +121,10 @@ export default function CreatorUploadClient({
   }
 
   function handleTitleChange(value: string) {
-    // Reject invalid characters without clearing valid input.
     if (!ALLOWED_TEXT_PATTERN.test(value)) {
-      setStatus("Use letters, spaces and special characters only. Numbers are not allowed.");
+      setStatus(
+        "Use letters, spaces and special characters only. Numbers are not allowed.",
+      );
       return;
     }
 
@@ -140,7 +139,9 @@ export default function CreatorUploadClient({
 
   function handleDescriptionChange(value: string) {
     if (!ALLOWED_TEXT_PATTERN.test(value)) {
-      setStatus("Use letters, spaces and special characters only. Numbers are not allowed.");
+      setStatus(
+        "Use letters, spaces and special characters only. Numbers are not allowed.",
+      );
       return;
     }
 
@@ -187,7 +188,9 @@ export default function CreatorUploadClient({
       !ALLOWED_TEXT_PATTERN.test(cleanTitle) ||
       !ALLOWED_TEXT_PATTERN.test(cleanDescription)
     ) {
-      setStatus("Use letters, spaces and special characters only. Numbers are not allowed.");
+      setStatus(
+        "Use letters, spaces and special characters only. Numbers are not allowed.",
+      );
       return;
     }
 
@@ -301,9 +304,12 @@ export default function CreatorUploadClient({
             </button>
 
             <Link href="/profile" className={styles.userMenu}>
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=96&q=85"
                 alt="Profile"
+                width={32}
+                height={32}
+                unoptimized
               />
               <span>{email.split("@")[0] || "Creator"}</span>
               <ChevronDown size={15} />
@@ -366,9 +372,30 @@ export default function CreatorUploadClient({
           </div>
 
           <div className={styles.artwork} aria-label="Wallpaper artwork">
-            <img className={styles.artOne} src={art[0]} alt="Mountain wallpaper preview" />
-            <img className={styles.artTwo} src={art[1]} alt="Forest wallpaper preview" />
-            <img className={styles.artThree} src={art[2]} alt="Night sky wallpaper preview" />
+            <Image
+              className={styles.artOne}
+              src={art[0]}
+              alt="Mountain wallpaper preview"
+              width={500}
+              height={700}
+              unoptimized
+            />
+            <Image
+              className={styles.artTwo}
+              src={art[1]}
+              alt="Forest wallpaper preview"
+              width={500}
+              height={700}
+              unoptimized
+            />
+            <Image
+              className={styles.artThree}
+              src={art[2]}
+              alt="Night sky wallpaper preview"
+              width={500}
+              height={700}
+              unoptimized
+            />
 
             <div className={styles.floatBadge}>
               <UploadCloud />
@@ -442,7 +469,13 @@ export default function CreatorUploadClient({
             >
               {preview ? (
                 <div className={styles.previewWrap}>
-                  <img src={preview} alt="Selected wallpaper preview" />
+                  <Image
+                    src={preview}
+                    alt="Selected wallpaper preview"
+                    width={1200}
+                    height={1200}
+                    unoptimized
+                  />
                   <button
                     type="button"
                     onClick={() => {
@@ -553,11 +586,26 @@ export default function CreatorUploadClient({
             </h2>
 
             <ul>
-              <li><CheckCircle2 />High-quality images (minimum 1920×1080)</li>
-              <li><CheckCircle2 />Original content or proper licensing</li>
-              <li><CheckCircle2 />No sensitive or inappropriate content</li>
-              <li><CheckCircle2 />Clear and descriptive title</li>
-              <li><CheckCircle2 />Add relevant categories and tags</li>
+              <li>
+                <CheckCircle2 />
+                High-quality images (minimum 1920×1080)
+              </li>
+              <li>
+                <CheckCircle2 />
+                Original content or proper licensing
+              </li>
+              <li>
+                <CheckCircle2 />
+                No sensitive or inappropriate content
+              </li>
+              <li>
+                <CheckCircle2 />
+                Clear and descriptive title
+              </li>
+              <li>
+                <CheckCircle2 />
+                Add relevant categories and tags
+              </li>
             </ul>
 
             <div className={styles.tip}>
@@ -580,13 +628,21 @@ export default function CreatorUploadClient({
       </section>
 
       <nav className={styles.mobileNav}>
-        <Link href="/home"><Home /></Link>
-        <Link href="/explore"><Compass /></Link>
+        <Link href="/home">
+          <Home />
+        </Link>
+        <Link href="/explore">
+          <Compass />
+        </Link>
         <Link href="/creator/upload" className={styles.mobilePlus}>
           <UploadCloud />
         </Link>
-        <Link href="/profile"><UserRound /></Link>
-        <Link href="/profile?tab=collections"><FolderHeart /></Link>
+        <Link href="/profile">
+          <UserRound />
+        </Link>
+        <Link href="/profile?tab=collections">
+          <FolderHeart />
+        </Link>
       </nav>
     </main>
   );

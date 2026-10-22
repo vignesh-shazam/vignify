@@ -1,7 +1,7 @@
-
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
   Bell,
@@ -9,7 +9,6 @@ import {
   Check,
   ChevronDown,
   Compass,
-  Eye,
   Flame,
   FolderHeart,
   Heart,
@@ -134,8 +133,9 @@ export default function ProfileClient({
             <Link
               key={label}
               href={href}
-              className={`${styles.navItem} ${label === "My Profile" ? styles.active : ""
-                }`}
+              className={`${styles.navItem} ${
+                label === "My Profile" ? styles.active : ""
+              }`}
             >
               <Icon />
               {label}
@@ -168,7 +168,13 @@ export default function ProfileClient({
             </button>
 
             <Link href="/profile" className={styles.userMenu}>
-              <img src={avatar} alt="Profile" />
+              <Image
+                src={avatar}
+                alt="Profile"
+                width={36}
+                height={36}
+                unoptimized
+              />
               <span>{name}</span>
               <ChevronDown size={15} />
             </Link>
@@ -180,7 +186,13 @@ export default function ProfileClient({
 
           <div className={styles.profileIdentity}>
             <div className={styles.avatarWrap}>
-              <img src={avatar} alt="Creator avatar" />
+              <Image
+                src={avatar}
+                alt="Creator avatar"
+                width={120}
+                height={120}
+                unoptimized
+              />
               <i />
             </div>
 
@@ -319,7 +331,10 @@ export default function ProfileClient({
           <section className={styles.panel}>
             <h2>Account settings</h2>
             <p>{email}</p>
-            <p>Profile visibility and account security settings will appear here.</p>
+            <p>
+              Profile visibility and account security settings will appear
+              here.
+            </p>
             <Link href="/creator/upload" className={styles.inlineLink}>
               Manage your uploads <span>→</span>
             </Link>
@@ -373,62 +388,63 @@ export default function ProfileClient({
                 </Link>
               </div>
             ) : (
-              <>  
-                <div className={styles.wallpaperGrid}>
-                  {uploads.map((item) => (
-                    <article
-                      key={item.id}
-                      className={styles.wallpaperCard}
+              <div className={styles.wallpaperGrid}>
+                {uploads.map((item) => (
+                  <article
+                    key={item.id}
+                    className={styles.wallpaperCard}
+                  >
+                    <Image
+                      className={styles.wallpaperImage}
+                      src={`/api/wallpapers/${item.id}/image`}
+                      alt={item.title}
+                      width={560}
+                      height={800}
+                      loading="lazy"
+                      unoptimized
+                    />
+
+                    <span
+                      className={`${styles.resolution} ${
+                        item.status === "published"
+                          ? styles.published
+                          : item.status === "rejected"
+                            ? styles.rejected
+                            : ""
+                      }`}
                     >
-                      <img
-                        className={styles.wallpaperImage}
-                        src={`/api/wallpapers/${item.id}/image`}
-                        alt={item.title}
-                        loading="lazy"
-                      />
+                      {statusLabel(item.status)}
+                    </span>
 
-                      <span
-                        className={`${styles.resolution} ${item.status === "published"
-                            ? styles.published
-                            : item.status === "rejected"
-                              ? styles.rejected
-                              : ""
-                          }`}
-                      >
-                        {statusLabel(item.status)}
-                      </span>
-
-                      <button
-                        className={styles.cardMore}
-                        aria-label={`View status for ${item.title}`}
-                        onClick={() =>
-                          setNotice(
-                            `${item.title}: ${item.status === "published"
+                    <button
+                      className={styles.cardMore}
+                      aria-label={`View status for ${item.title}`}
+                      onClick={() =>
+                        setNotice(
+                          `${item.title}: ${
+                            item.status === "published"
                               ? "Published"
                               : item.status === "rejected"
                                 ? "Rejected"
                                 : "Waiting for review"
-                            }`
-                          )
-                        }
-                      >
-                        <MoreHorizontal size={18} />
-                      </button>
+                          }`
+                        )
+                      }
+                    >
+                      <MoreHorizontal size={18} />
+                    </button>
 
-                      <div className={styles.cardGradient} />
+                    <div className={styles.cardGradient} />
 
-                      <div className={styles.cardMeta}>
-                        <span className={styles.cardTitle}>
-                          {item.title}
-                        </span>
-                        <span title={formatDate(item.createdAt)}>
-                          {formatDate(item.createdAt)}
-                        </span>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-              </>
+                    <div className={styles.cardMeta}>
+                      <span className={styles.cardTitle}>{item.title}</span>
+                      <span title={formatDate(item.createdAt)}>
+                        {formatDate(item.createdAt)}
+                      </span>
+                    </div>
+                  </article>
+                ))}
+              </div>
             )}
           </section>
         )}
@@ -462,10 +478,7 @@ export default function ProfileClient({
         >
           <UserRound />
         </Link>
-        <Link
-          href="/profile?tab=collections"
-          aria-label="Collections"
-        >
+        <Link href="/profile?tab=collections" aria-label="Collections">
           <FolderHeart />
         </Link>
       </nav>

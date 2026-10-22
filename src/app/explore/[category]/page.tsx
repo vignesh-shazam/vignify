@@ -189,7 +189,7 @@ export default async function CategoryPage({
                             More {categoryInfo.name.toLowerCase()} coming soon
                         </h2>
                         <p className="mt-2 text-sm text-white/45">
-                            We're preparing more customizations for this category.
+                            We&apos;re preparing more customizations for this category.
                         </p>
                         <Link href="/explore" className="vignify-interactive vignify-button-primary mt-6">
                             Explore all items →

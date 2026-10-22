@@ -1,11 +1,13 @@
-
 "use client";
 
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import AuthLayout from "@/components/auth/AuthLayout";
 
 export default function LoginPage() {
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -54,7 +56,7 @@ export default function LoginPage() {
       }
 
       setMessage("Signed in successfully. Redirecting...");
-      window.location.href = "/home";
+      router.push("/home");
     } catch {
       setError("Unable to connect to the server. Please try again.");
     } finally {
