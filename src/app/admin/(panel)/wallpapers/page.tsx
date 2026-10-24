@@ -17,13 +17,14 @@ import {
 } from "lucide-react";
 
 import { createClient } from "@/lib/supabase/server";
+import { WallpaperModerationActions } from "@/components/admin/wallpaper-moderation-actions";
 
 type WallpaperStatus = "pending" | "published" | "rejected";
 
 type Wallpaper = {
   id: string;
   title: string;
-  description: string;
+  description: string | null;
   image_path: string;
   status: WallpaperStatus;
   created_at: string;
@@ -67,9 +68,8 @@ function StatusBadge({ status }: { status: string }) {
 
   return (
     <span
-      className={`inline-flex rounded-full border px-2.5 py-1 text-xs font-medium capitalize ${
-        styles[status] ?? styles.pending
-      }`}
+      className={`inline-flex rounded-full border px-2.5 py-1 text-xs font-medium capitalize ${styles[status] ?? styles.pending
+        }`}
     >
       {status}
     </span>
@@ -93,9 +93,10 @@ export default async function AdminWallpapersPage({
   // Authenticate the current user on the server.
   const {
     data: { user },
+    error: authError,
   } = await supabase.auth.getUser();
 
-  if (!user) {
+  if (authError || !user) {
     redirect("/admin/login");
   }
 
@@ -124,7 +125,7 @@ export default async function AdminWallpapersPage({
 
     const matchesSearch =
       !normalizedQuery ||
-      wallpaper.title.toLowerCase().includes(normalizedQuery) ||
+      (wallpaper.title ?? "").toLowerCase().includes(normalizedQuery) ||
       wallpaper.id.toLowerCase().includes(normalizedQuery) ||
       wallpaper.creator_id.toLowerCase().includes(normalizedQuery);
 
@@ -139,7 +140,7 @@ export default async function AdminWallpapersPage({
     pending: wallpapers.filter((item) => item.status === "pending").length,
     published: wallpapers.filter((item) => item.status === "published").length,
     rejected: wallpapers.filter((item) => item.status === "rejected").length,
-    // Soft deletion has not been implemented in the current schema.
+    // Soft deletion is not implemented in the current database schema.
     deleted: 0,
   };
 
@@ -171,7 +172,7 @@ export default async function AdminWallpapersPage({
   ];
 
   return (
-    <main className="min-h-screen bg-[#080B09] text-[#F5F7F6]">
+    <main className="min-h-screen bg-transparent text-[#F5F7F6]">
       <div className="mx-auto max-w-[1600px] space-y-8 p-5 sm:p-8">
         {/* Page heading */}
         <header className="flex flex-col justify-between gap-5 md:flex-row md:items-center">
@@ -202,7 +203,7 @@ export default async function AdminWallpapersPage({
 
             <Link
               href="/creator/upload"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#B9F56B] px-4 py-2.5 text-sm font-semibold text-[#080B09] transition hover:bg-[#cbff8c]"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#B9F56B] px-4 py-2.5 text-sm font-semibold text-black transition hover:bg-[#cbff8c]"
             >
               <ImageIcon size={16} />
               Upload Wallpaper
@@ -273,14 +274,12 @@ export default async function AdminWallpapersPage({
                         : `/admin/wallpapers?status=${tab.value}`
                     }
                     aria-current={isActive ? "page" : undefined}
-                    className={`inline-flex shrink-0 items-center gap-2 rounded-xl border px-4 py-2.5 text-sm transition ${
-                      isActive
+                    className={`inline-flex shrink-0 items-center gap-2 rounded-xl border px-4 py-2.5 text-sm transition ${isActive
                         ? "border-[#B9F56B]/30 bg-[#B9F56B]/10 text-[#B9F56B]"
                         : "border-[#263537] text-[#87969A] hover:border-[#55E6DC]/40 hover:text-white"
-                    }`}
+                      }`}
                   >
                     {tab.label}
-
                     <span className="text-xs opacity-75">{count}</span>
                   </Link>
                 );
@@ -300,7 +299,7 @@ export default async function AdminWallpapersPage({
                 />
               )}
 
-              <label className="flex min-w-0 items-center gap-2 rounded-xl border border-[#263537] bg-[#10191B] px-3.5 sm:min-w-[280px]">
+              <label className="flex min-w-0 items-center gap-2 rounded-xl border border-[#263537] bg-[#10191B] px-3.5 sm:min-w-70">
                 <Search
                   size={17}
                   aria-hidden="true"
@@ -368,17 +367,17 @@ export default async function AdminWallpapersPage({
                   className="group overflow-hidden rounded-2xl border border-[#263537] bg-[#10191B] transition hover:border-[#55E6DC]/40"
                 >
                   {/* Image preview */}
-                  <div className="relative aspect-[4/3] overflow-hidden bg-[#172123]">
+                  <div className="relative aspect-4/3 overflow-hidden bg-[#172123]">
                     <div
                       aria-hidden="true"
-                      className="absolute inset-0 flex items-center justify-center text-[#68777A]"
+                      className="pointer-events-none absolute inset-0 flex items-center justify-center text-[#68777A]"
                     >
                       <ImageIcon size={34} />
                     </div>
 
                     <Image
                       src={`/api/wallpapers/${wallpaper.id}/image`}
-                      alt={wallpaper.title}
+                      alt={wallpaper.title || "Wallpaper preview"}
                       fill
                       unoptimized
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
@@ -394,7 +393,7 @@ export default async function AdminWallpapersPage({
                   <div className="space-y-4 p-4">
                     <div className="min-w-0">
                       <h2 className="truncate font-medium">
-                        {wallpaper.title}
+                        {wallpaper.title || "Untitled wallpaper"}
                       </h2>
 
                       <p className="mt-1 truncate text-xs text-[#87969A]">
@@ -420,33 +419,19 @@ export default async function AdminWallpapersPage({
                           aria-hidden="true"
                           className="ml-2"
                         />
-
                         <span title="Like analytics not connected">—</span>
                       </span>
                     </div>
 
                     {/* Moderation actions */}
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap items-center gap-2">
                       {wallpaper.status === "pending" && (
-                        <>
-                          <button
-                            type="button"
-                            disabled
-                            title="Secure moderation API is not implemented yet"
-                            className="flex-1 cursor-not-allowed rounded-lg bg-[#B9F56B]/10 px-3 py-2 text-xs font-medium text-[#B9F56B]/50"
-                          >
-                            Approve
-                          </button>
-
-                          <button
-                            type="button"
-                            disabled
-                            title="Secure moderation API is not implemented yet"
-                            className="flex-1 cursor-not-allowed rounded-lg border border-rose-400/20 px-3 py-2 text-xs font-medium text-rose-300/50"
-                          >
-                            Reject
-                          </button>
-                        </>
+                        <WallpaperModerationActions
+                          wallpaperId={wallpaper.id}
+                          wallpaperTitle={
+                            wallpaper.title || "Untitled wallpaper"
+                          }
+                        />
                       )}
 
                       <Link
@@ -461,7 +446,7 @@ export default async function AdminWallpapersPage({
                         type="button"
                         disabled
                         title="Audited soft-delete support is not implemented yet"
-                        aria-label={`Delete ${wallpaper.title} (not available yet)`}
+                        aria-label={`Delete ${wallpaper.title || "wallpaper"} (not available yet)`}
                         className="inline-flex cursor-not-allowed items-center rounded-lg border border-[#263537] px-3 py-2 text-[#68777A]"
                       >
                         <Trash2 size={14} />

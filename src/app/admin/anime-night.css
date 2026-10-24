@@ -1,0 +1,79 @@
+
+/* =========================================================
+   VIGNIFY ADMIN — ANIME NIGHT THEME
+   Shared background and glass UI for all admin modules
+   ========================================================= */
+
+/* Base page background */
+html,
+body {
+  min-height: 100%;
+  background: #050812;
+}
+
+/* Admin application root */
+.admin-root {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  background: transparent !important;
+}
+
+/* Fixed full-screen wallpaper */
+.admin-root > .anime-night-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(3, 6, 18, 0.35),
+      rgba(3, 6, 18, 0.55)
+    ),
+    url("/images/admin/wallpapers/admin-anime-night.png");
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Decorative effects must not block interaction */
+.admin-root > .anime-night-effects {
+  pointer-events: none;
+}
+
+/* Keep application content above the wallpaper */
+.admin-root > .admin-sidebar,
+.admin-root > .admin-main {
+  position: relative;
+  z-index: 1;
+}
+
+/* Transparent content surfaces */
+.admin-root .admin-main,
+.admin-root .admin-content {
+  background: transparent !important;
+}
+
+/* Glass sidebar and top navigation */
+.admin-root .admin-sidebar,
+.admin-root .admin-topbar {
+  background: rgba(3, 9, 17, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Shared translucent card surfaces */
+.admin-root .admin-content .stat-card,
+.admin-root .admin-content .dashboard-card,
+.admin-root .admin-content .panel {
+  background-color: rgba(5, 13, 24, 0.82);
+}
+
+/* Dark text on lime-green primary actions */
+.admin-root .admin-primary-button,
+.admin-root .admin-primary-button * {
+  color: #050805 !important;
+}

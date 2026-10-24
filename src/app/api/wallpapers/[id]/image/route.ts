@@ -25,7 +25,7 @@ export async function GET(
 
   const { data: wallpaper, error: wallpaperError } = await supabase
     .from("wallpapers")
-    .select("id,creator_id,image_path,status,deleted_at")
+    .select("id,creator_id,image_path,status")
     .eq("id", id)
     .maybeSingle();
 
@@ -39,7 +39,8 @@ export async function GET(
 
   const isOwner = Boolean(user && user.id === wallpaper.creator_id);
   const isAdmin = user?.app_metadata?.role === "admin";
-  const isPublic = wallpaper.status === "published" && !wallpaper.deleted_at;
+  const isPublic = wallpaper.status === "published";
+
 
   if (!isPublic && !isOwner && !isAdmin) {
     return NextResponse.json({ error: "Wallpaper not found." }, { status: 404 });
