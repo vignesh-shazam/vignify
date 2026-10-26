@@ -39,3 +39,24 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Vignify Android mobile build
+/capacitor-web/
+/android/.idea/
+/android/local.properties
+/android/.gradle/
+/android/build/
+/android/app/build/
+
+# Local backups and temporary files
+*.bak
+*.backup
+globals-css-current.txt
+
+# Database backups - never commit
+/vignify-backup.sql
+/vignify-production-backup.sql
+/vignify-production-data-backup.sql
+/vignify-production-full-schema.sql
+/vignify-production-public-schema.sql
+/storage-schema.sql

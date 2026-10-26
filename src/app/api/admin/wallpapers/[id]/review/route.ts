@@ -8,7 +8,6 @@ export async function POST(
 ) {
     try {
         const { supabase, user, isAdmin } = await getAdminSession();
-
         if (!user) {
             return NextResponse.json(
                 { error: "Unauthorized." },
