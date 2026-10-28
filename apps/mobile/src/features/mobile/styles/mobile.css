@@ -1,0 +1,2337 @@
+@import "tailwindcss";
+@import "./glassy/styles.css";
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+  overflow-x: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Vigniti mobile theme */
+
+.vignify-mobile-root {
+  --mobile-bg: #090a12;
+  --mobile-surface: #171729;
+  --mobile-surface-raised: #202037;
+  --mobile-text: #f7f7fc;
+  --mobile-muted: #a5a5bb;
+  --mobile-border: rgba(255, 255, 255, 0.09);
+  --mobile-accent: #a78bfa;
+  --mobile-accent-strong: #8b5cf6;
+  --mobile-cyan: #22d3ee;
+
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  color: var(--mobile-text);
+  background: var(--mobile-bg);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.vignify-mobile-root[data-theme="light"] {
+  --mobile-bg: #f7f7fc;
+  --mobile-surface: #ffffff;
+  --mobile-surface-raised: #eeedf7;
+  --mobile-text: #19172b;
+  --mobile-muted: #66647b;
+  --mobile-border: rgba(25, 23, 43, 0.1);
+  --mobile-accent: #7c3aed;
+  --mobile-accent-strong: #6d28d9;
+  --mobile-cyan: #087e9b;
+}
+
+.vignify-mobile-root *,
+.vignify-mobile-root *::before,
+.vignify-mobile-root *::after {
+  box-sizing: border-box;
+}
+
+.vignify-mobile-root button,
+.vignify-mobile-root a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.vignify-mobile-root button {
+  font: inherit;
+}
+
+.vignify-mobile-root .mobile-app {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 430px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin-inline: auto;
+  padding-bottom: calc(84px + env(safe-area-inset-bottom));
+  overflow: clip;
+  background: var(--mobile-bg);
+  color: var(--mobile-text);
+}
+
+.vignify-mobile-root .mobile-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  min-height: 66px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--mobile-border);
+  background: var(--mobile-bg);
+}
+
+.vignify-mobile-root .mobile-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--mobile-text);
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  text-decoration: none;
+}
+
+.vignify-mobile-root .mobile-brand-mark {
+  display: grid;
+  width: 35px;
+  height: 35px;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--mobile-accent-strong);
+  color: white;
+}
+
+.vignify-mobile-root .mobile-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vignify-mobile-root .mobile-icon-button {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid var(--mobile-border);
+  border-radius: 15px;
+  background: var(--mobile-surface);
+  color: var(--mobile-text);
+  cursor: pointer;
+}
+
+.vignify-mobile-root .mobile-icon-button:active,
+.vignify-mobile-root .mobile-nav-item:active {
+  transform: scale(0.96);
+}
+
+.vignify-mobile-root .mobile-content {
+  flex: 1;
+  padding: 30px 20px 28px;
+  animation: vignify-mobile-enter 220ms ease both;
+}
+
+.vignify-mobile-root .mobile-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--mobile-accent);
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 1.2px;
+}
+
+.vignify-mobile-root .mobile-content h1 {
+  margin: 15px 0 9px;
+  font-size: clamp(32px, 8vw, 43px);
+  font-weight: 800;
+  letter-spacing: -1.7px;
+  line-height: 1.08;
+}
+
+.vignify-mobile-root .mobile-intro {
+  max-width: 340px;
+  margin: 0;
+  color: var(--mobile-muted);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.vignify-mobile-root .mobile-welcome-card {
+  position: relative;
+  margin-top: 29px;
+  padding: 25px 22px;
+  overflow: hidden;
+  border: 1px solid var(--mobile-border);
+  border-radius: 25px;
+  background:
+    radial-gradient(circle at 100% 0%,
+      color-mix(in srgb, var(--mobile-accent-strong) 30%, transparent),
+      transparent 52%),
+    var(--mobile-surface);
+}
+
+.vignify-mobile-root .mobile-welcome-icon,
+.vignify-mobile-root .mobile-placeholder-icon {
+  display: grid;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  border: 1px solid var(--mobile-border);
+  border-radius: 18px;
+  background: var(--mobile-surface-raised);
+  color: var(--mobile-accent);
+}
+
+.vignify-mobile-root .mobile-welcome-card h2 {
+  margin: 25px 0 9px;
+  font-size: 24px;
+  font-weight: 750;
+  letter-spacing: -0.7px;
+}
+
+.vignify-mobile-root .mobile-welcome-card p,
+.vignify-mobile-root .mobile-placeholder-card p {
+  margin: 0;
+  color: var(--mobile-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.vignify-mobile-root .mobile-primary-button {
+  display: flex;
+  min-height: 50px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-top: 23px;
+  padding: 12px 18px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--mobile-accent-strong);
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.vignify-mobile-root .mobile-primary-button:hover {
+  opacity: 0.92;
+}
+
+.vignify-mobile-root .mobile-primary-button:active {
+  transform: scale(0.98);
+}
+
+.vignify-mobile-root .mobile-placeholder-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 17px;
+  margin-top: 28px;
+  padding: 23px;
+  border: 1px solid var(--mobile-border);
+  border-radius: 23px;
+  background: var(--mobile-surface);
+}
+
+.vignify-mobile-root .mobile-placeholder-icon {
+  font-size: 30px;
+}
+
+.vignify-mobile-root .mobile-bottom-nav {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 430px;
+  min-height: calc(74px + env(safe-area-inset-bottom));
+  margin-inline: auto;
+  padding: 8px 7px calc(8px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--mobile-border);
+  background: var(--mobile-bg);
+}
+
+.vignify-mobile-root .mobile-nav-item {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  min-height: 54px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 0;
+  border-radius: 14px;
+  background: transparent;
+  color: var(--mobile-muted);
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.vignify-mobile-root .mobile-nav-item.is-active {
+  color: var(--mobile-accent);
+}
+
+.vignify-mobile-root button:focus-visible,
+.vignify-mobile-root a:focus-visible {
+  outline: 2px solid var(--mobile-accent);
+  outline-offset: 3px;
+}
+
+/* Mobile home */
+
+.vignify-mobile-root .mobile-home {
+  width: 100%;
+  padding: 20px 0 12px;
+}
+
+.vignify-mobile-root .mobile-hero {
+  position: relative;
+  margin: 0 16px 30px;
+  padding: 27px 21px;
+  overflow: hidden;
+  border: 1px solid var(--mobile-border);
+  border-radius: 27px;
+  background: linear-gradient(145deg,
+      var(--mobile-surface),
+      color-mix(in srgb, var(--mobile-accent-strong) 18%, var(--mobile-surface)));
+}
+
+.vignify-mobile-root .mobile-hero-glow {
+  position: absolute;
+  top: -85px;
+  right: -75px;
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  background: var(--mobile-accent-strong);
+  opacity: 0.17;
+  filter: blur(45px);
+  pointer-events: none;
+}
+
+.vignify-mobile-root .mobile-hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.vignify-mobile-root .mobile-hero-label,
+.vignify-mobile-root .mobile-section-kicker {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--mobile-accent);
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 1px;
+}
+
+.vignify-mobile-root .mobile-hero h1 {
+  margin: 20px 0 12px;
+  font-size: clamp(33px, 8vw, 43px);
+  font-weight: 850;
+  letter-spacing: -1.8px;
+  line-height: 1.07;
+}
+
+.vignify-mobile-root .mobile-hero h1 span {
+  color: var(--mobile-accent);
+}
+
+.vignify-mobile-root .mobile-hero p {
+  max-width: 285px;
+  margin: 0;
+  color: var(--mobile-muted);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.vignify-mobile-root .mobile-hero-button {
+  display: inline-flex;
+  width: auto;
+  align-items: center;
+  gap: 10px;
+  margin-top: 21px;
+  padding-inline: 18px;
+}
+
+.vignify-mobile-root .mobile-home-section {
+  margin: 0 16px 30px;
+}
+
+.vignify-mobile-root .mobile-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.vignify-mobile-root .mobile-section-heading h2 {
+  margin: 5px 0 0;
+  font-size: 22px;
+  font-weight: 780;
+  letter-spacing: -0.6px;
+}
+
+.vignify-mobile-root .mobile-category-list {
+  display: flex;
+  gap: 8px;
+  padding: 2px 0 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.vignify-mobile-root .mobile-category-list::-webkit-scrollbar {
+  display: none;
+}
+
+.vignify-mobile-root .mobile-category-chip {
+  flex: 0 0 auto;
+  min-height: 39px;
+  padding: 9px 15px;
+  border: 1px solid var(--mobile-border);
+  border-radius: 13px;
+  background: var(--mobile-surface);
+  color: var(--mobile-muted);
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.vignify-mobile-root .mobile-category-chip.is-active {
+  border-color: transparent;
+  background: var(--mobile-accent-strong);
+  color: #fff;
+}
+
+.vignify-mobile-root .mobile-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 0 8px 8px;
+  border: 0;
+  background: transparent;
+  color: var(--mobile-accent);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.vignify-mobile-root .mobile-wallpaper-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 12px;
+}
+
+.vignify-mobile-root .mobile-wallpaper-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--mobile-border);
+  border-radius: 18px;
+  background: var(--mobile-surface);
+}
+
+.vignify-mobile-root .mobile-wallpaper-image {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 0.83;
+  padding: 0;
+  border: 0;
+  background-color: var(--mobile-surface-raised);
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.vignify-mobile-root .mobile-wallpaper-category {
+  position: absolute;
+  bottom: 9px;
+  left: 9px;
+  padding: 6px 9px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 9px;
+  background: rgba(10, 10, 20, 0.72);
+  color: white;
+  font-size: 10px;
+  font-weight: 650;
+  backdrop-filter: blur(10px);
+}
+
+.vignify-mobile-root .mobile-wallpaper-info {
+  display: flex;
+  min-height: 51px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  padding: 8px 9px;
+}
+
+.vignify-mobile-root .mobile-wallpaper-title {
+  min-width: 0;
+  overflow: hidden;
+  padding: 4px 0;
+  border: 0;
+  background: transparent;
+  color: var(--mobile-text);
+  font-size: 12px;
+  font-weight: 700;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.vignify-mobile-root .mobile-wallpaper-actions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 2px;
+}
+
+.vignify-mobile-root .mobile-card-icon {
+  display: grid;
+  width: 30px;
+  height: 34px;
+  place-items: center;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--mobile-muted);
+  cursor: pointer;
+}
+
+.vignify-mobile-root .mobile-card-icon.is-saved {
+  color: #f472b6;
+}
+
+.vignify-mobile-root .mobile-empty-state,
+.vignify-mobile-root .mobile-demo-note {
+  color: var(--mobile-muted);
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.vignify-mobile-root .mobile-demo-note {
+  margin: 18px 20px;
+}
+
+.vignify-mobile-root .mobile-detail-preview {
+  flex: 1;
+}
+
+.vignify-mobile-root .mobile-detail-image {
+  width: 100%;
+  aspect-ratio: 0.8;
+  margin-top: 18px;
+  border-radius: 22px;
+  background-color: var(--mobile-surface);
+  background-position: center;
+  background-size: cover;
+}
+
+.vignify-mobile-root .mobile-detail-preview h1 {
+  margin-top: 20px;
+}
+
+/* Mobile animations */
+
+@keyframes vignify-mobile-enter {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 480px) {
+  .vignify-mobile-root .mobile-wallpaper-grid {
+    gap: 16px;
+  }
+
+  .vignify-mobile-root .mobile-wallpaper-info {
+    padding-inline: 12px;
+  }
+}
+
+@media (min-width: 700px) {
+  .vignify-mobile-root .mobile-app {
+    border-right: 1px solid var(--mobile-border);
+    border-left: 1px solid var(--mobile-border);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .vignify-mobile-root *,
+  .vignify-mobile-root *::before,
+  .vignify-mobile-root *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+
+/* Screenshot-matched Vigniti mobile home */
+.vignify-mobile-root .mobile-header {
+  min-height: calc(54px + env(safe-area-inset-top, 0px));
+  padding:
+    calc(8px + env(safe-area-inset-top, 0px)) 14px 8px;
+  border-bottom: 0;
+  background: var(--mobile-bg);
+}
+
+.vignify-mobile-root .mobile-menu-button,
+.vignify-mobile-root .mobile-notification-button {
+  position: relative;
+  width: 28px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+}
+
+.vignify-mobile-root .mobile-brand {
+  gap: 5px;
+  font-size: 17px;
+  letter-spacing: -0.6px;
+}
+
+.vignify-mobile-root .mobile-brand-mark {
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+  background: transparent;
+  color: #d946ef;
+}
+
+.vignify-mobile-root .mobile-notification-dot {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fb7185;
+}
+
+.vignify-mobile-root .mobile-search-bar {
+  display: flex;
+  height: 36px;
+  align-items: center;
+  gap: 8px;
+  margin: 2px 14px 10px;
+  padding: 0 10px;
+  border: 1px solid #343448;
+  border-radius: 14px;
+  background: #1a1a2b;
+  color: #a5a5bb;
+}
+
+.vignify-mobile-root .mobile-search-bar input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #f7f7fc;
+  font-size: 11px;
+}
+
+.vignify-mobile-root .mobile-search-bar input::placeholder {
+  color: #a5a5bb;
+}
+
+/* ── Upload Content CTA ─────────────────────────────────────────────── */
+
+.vignify-mobile-root .mobile-app .mobile-upload-content-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: calc(100% - 28px);
+  margin: 10px 14px 12px;
+  padding: 14px 18px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(90deg, #7c3aed 0%, #a855f7 45%, #ec4899 100%);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 4px 20px rgba(168, 85, 247, 0.45),
+    0 1px 0 rgba(255, 255, 255, 0.12) inset;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    filter 180ms ease;
+  -webkit-tap-highlight-color: transparent;
+  z-index: 2;
+}
+
+/* Shimmer sweep */
+.vignify-mobile-root .mobile-app .mobile-upload-content-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.18) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  animation: upload-cta-shimmer 2.8s ease-in-out infinite;
+}
+
+@keyframes upload-cta-shimmer {
+  0%   { background-position: -100% 0; }
+  60%  { background-position: 200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.vignify-mobile-root .mobile-app .mobile-upload-content-cta:hover {
+  filter: brightness(1.08);
+  box-shadow:
+    0 6px 28px rgba(168, 85, 247, 0.55),
+    0 1px 0 rgba(255, 255, 255, 0.15) inset;
+}
+
+.vignify-mobile-root .mobile-app .mobile-upload-content-cta:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 12px rgba(168, 85, 247, 0.35);
+}
+
+/* Push the arrow to the far right — removed, button is now centred */
+
+/* Glass theme */
+.vignify-mobile-root .mobile-app[data-mobile-theme="glass"] .mobile-upload-content-cta {
+  background: linear-gradient(90deg, rgba(124,58,237,0.85) 0%, rgba(168,85,247,0.85) 45%, rgba(236,72,153,0.85) 100%);
+  backdrop-filter: blur(12px);
+}
+
+/* Light theme */
+.vignify-mobile-root .mobile-app[data-mobile-theme="light"] .mobile-upload-content-cta {
+  background: linear-gradient(90deg, #7c3aed 0%, #a855f7 45%, #ec4899 100%);
+  box-shadow:
+    0 4px 18px rgba(124, 58, 237, 0.35),
+    0 1px 0 rgba(255, 255, 255, 0.2) inset;
+}
+.vignify-mobile-root .mobile-quick-menu,
+.vignify-mobile-root .mobile-notification-panel {
+  position: relative;
+  z-index: 12;
+  margin: 0 14px 8px;
+  padding: 10px;
+  border: 1px solid var(--mobile-border);
+  border-radius: 12px;
+  background: var(--mobile-surface);
+}
+
+.vignify-mobile-root .mobile-quick-menu {
+  display: flex;
+  justify-content: space-around;
+  gap: 6px;
+}
+
+.vignify-mobile-root .mobile-quick-menu button {
+  border: 0;
+  background: transparent;
+  color: var(--mobile-text);
+  font-size: 11px;
+}
+
+.vignify-mobile-root .mobile-notification-panel p {
+  margin: 6px 0 0;
+  color: var(--mobile-muted);
+  font-size: 12px;
+}
+
+.vignify-mobile-root .mobile-home {
+  padding: 0 0 14px;
+}
+
+.vignify-mobile-root .mobile-hero {
+  display: flex;
+  min-height: 116px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 14px 12px;
+  padding: 12px 13px;
+  border: 0;
+  border-radius: 15px;
+  background: linear-gradient(115deg, #ff7a00 0%, #f43f85 49%, #702cff 100%);
+  box-shadow: 0 5px 16px rgb(120 40 255 / 18%);
+}
+
+.vignify-mobile-root .mobile-hero-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.vignify-mobile-root .mobile-hero h1 {
+  margin: 0;
+  color: #fff;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  line-height: 1.13;
+}
+
+.vignify-mobile-root .mobile-hero-button {
+  display: inline-flex;
+  min-height: 27px;
+  align-items: center;
+  gap: 7px;
+  margin-top: 10px;
+  padding: 5px 8px 5px 10px;
+  border-radius: 20px;
+  background: #171329;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.vignify-mobile-root .mobile-hero-arrow {
+  display: grid;
+  width: 18px;
+  height: 18px;
+  place-items: center;
+  border-radius: 50%;
+  background: #a855f7;
+}
+
+.vignify-mobile-root .mobile-hero-art {
+  position: relative;
+  flex: 0 0 94px;
+  height: 95px;
+}
+
+.vignify-mobile-root .mobile-phone {
+  position: absolute;
+  width: 39px;
+  height: 77px;
+  overflow: hidden;
+  border: 2px solid #d9d4ff;
+  border-radius: 9px;
+  background: linear-gradient(150deg, #23d4e8, #3623a8 55%, #ff63be);
+  box-shadow: 0 5px 12px rgb(23 9 60 / 35%);
+}
+
+.vignify-mobile-root .phone-back {
+  top: 10px;
+  left: 13px;
+  transform: rotate(-12deg);
+}
+
+.vignify-mobile-root .phone-front {
+  top: 6px;
+  right: 11px;
+  transform: rotate(11deg);
+  background: linear-gradient(160deg, #26e6db, #2266c9 45%, #c42be8);
+}
+
+.vignify-mobile-root .mobile-phone-screen {
+  position: absolute;
+  inset: 4px;
+  border-radius: 5px;
+  background:
+    radial-gradient(ellipse at 70% 25%, #f7b9ff, transparent 25%),
+    linear-gradient(155deg, #1de4d8, #3432b8 50%, #ef52bd);
+}
+
+.vignify-mobile-root .mobile-hero-sparkle {
+  position: absolute;
+  top: 1px;
+  right: 0;
+  color: #ffe4ff;
+}
+
+.vignify-mobile-root .mobile-category-shortcuts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 5px;
+  margin: 0 10px 16px;
+}
+
+.vignify-mobile-root .mobile-category-shortcut {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--mobile-text);
+}
+
+.vignify-mobile-root .mobile-category-icon {
+  display: grid;
+  width: 35px;
+  height: 35px;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 11px;
+  color: #fff;
+  box-shadow: 0 3px 8px rgb(0 0 0 / 20%);
+}
+
+.vignify-mobile-root .mobile-category-shortcut.wallpapers .mobile-category-icon {
+  background: linear-gradient(145deg, #e879f9, #9333ea);
+}
+
+.vignify-mobile-root .mobile-category-shortcut.icons .mobile-category-icon {
+  background: linear-gradient(145deg, #38bdf8, #2563eb);
+}
+
+.vignify-mobile-root .mobile-category-shortcut.themes .mobile-category-icon {
+  background: linear-gradient(145deg, #34d399, #059669);
+}
+
+.vignify-mobile-root .mobile-category-shortcut.ringtones .mobile-category-icon {
+  background: linear-gradient(145deg, #67e8f9, #6366f1);
+}
+
+.vignify-mobile-root .mobile-category-label {
+  color: var(--mobile-text);
+  font-size: 9px;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.vignify-mobile-root .mobile-home-section {
+  margin: 0 14px 16px;
+}
+
+.vignify-mobile-root .mobile-section-heading {
+  margin-bottom: 8px;
+}
+
+.vignify-mobile-root .mobile-section-heading h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 750;
+  letter-spacing: -0.2px;
+}
+
+.vignify-mobile-root .mobile-text-link {
+  padding: 4px 0 4px 6px;
+  color: #b38aff;
+  font-size: 10px;
+}
+
+.vignify-mobile-root .mobile-wallpaper-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.vignify-mobile-root .mobile-wallpaper-card {
+  min-width: 0;
+  border: 1px solid #38384b;
+  border-radius: 10px;
+  background: #151523;
+}
+
+.vignify-mobile-root .mobile-wallpaper-image {
+  aspect-ratio: 0.74;
+  border-radius: 9px;
+  background-position: center;
+}
+
+.vignify-mobile-root .mobile-wallpaper-category {
+  display: none;
+}
+
+.vignify-mobile-root .mobile-card-heart {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: grid;
+  width: 25px;
+  height: 25px;
+  place-items: center;
+  border-radius: 50%;
+  background: rgb(10 10 22 / 42%);
+  color: #fff;
+}
+
+.vignify-mobile-root .mobile-card-heart.is-saved {
+  color: #fb7185;
+}
+
+.vignify-mobile-root .mobile-wallpaper-info {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  padding: 5px 6px 7px;
+}
+
+.vignify-mobile-root .mobile-wallpaper-title {
+  width: 100%;
+  padding: 0;
+  color: #f4f4fb;
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.vignify-mobile-root .mobile-wallpaper-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #e5e5f0;
+  font-size: 9px;
+}
+
+.vignify-mobile-root .mobile-wallpaper-rating span {
+  color: #facc15;
+  font-size: 12px;
+}
+
+.vignify-mobile-root .mobile-library-shortcut {
+  display: none;
+}
+
+.vignify-mobile-root .mobile-bottom-nav {
+  min-height: calc(57px + env(safe-area-inset-bottom));
+  padding: 5px 7px calc(5px + env(safe-area-inset-bottom));
+  border-top: 1px solid #29293a;
+  background: #0c0c16;
+}
+
+.vignify-mobile-root .mobile-nav-item {
+  min-height: 45px;
+  gap: 2px;
+  border-radius: 10px;
+  font-size: 9px;
+}
+
+.vignify-mobile-root .mobile-nav-item.is-active {
+  color: #c084fc;
+}
+
+@media (max-width: 360px) {
+  .vignify-mobile-root .mobile-hero-art {
+    flex-basis: 78px;
+  }
+
+  .vignify-mobile-root .mobile-phone {
+    width: 33px;
+    height: 68px;
+  }
+
+  .vignify-mobile-root .mobile-wallpaper-grid {
+    gap: 5px;
+  }
+
+  .vignify-mobile-root .mobile-wallpaper-title,
+  .vignify-mobile-root .mobile-wallpaper-rating {
+    font-size: 8px;
+  }
+}
+
+
+/* Mobile theme selector: scoped to the mobile app only */
+.vignify-mobile-root .mobile-app[data-mobile-theme="dark"] {
+  --mobile-bg: #090a12;
+  --mobile-surface: #171729;
+  --mobile-surface-raised: #202037;
+  --mobile-text: #f7f7fc;
+  --mobile-muted: #a5a5bb;
+  --mobile-border: rgba(255, 255, 255, 0.09);
+  --mobile-accent: #a78bfa;
+  --mobile-accent-strong: #8b5cf6;
+  --mobile-cyan: #22d3ee;
+}
+
+.vignify-mobile-root .mobile-app[data-mobile-theme="light"] {
+  --mobile-bg: #f7f7fc;
+  --mobile-surface: #ffffff;
+  --mobile-surface-raised: #eeedf7;
+  --mobile-text: #19172b;
+  --mobile-muted: #66647b;
+  --mobile-border: rgba(25, 23, 43, 0.12);
+  --mobile-accent: #7c3aed;
+  --mobile-accent-strong: #6d28d9;
+  --mobile-cyan: #087e9b;
+}
+
+.vignify-mobile-root .mobile-app[data-mobile-theme="glass"] {
+  --mobile-bg: #101522;
+  --mobile-surface: rgba(255, 255, 255, 0.075);
+  --mobile-surface-raised: rgba(255, 255, 255, 0.12);
+  --mobile-text: #f7f8ff;
+  --mobile-muted: #b6bfd4;
+  --mobile-border: rgba(255, 255, 255, 0.2);
+  --mobile-accent: #67e8f9;
+  --mobile-accent-strong: #8b5cf6;
+  --mobile-cyan: #67e8f9;
+  background-image:
+    radial-gradient(ellipse at 8% 8%, rgba(139, 92, 246, 0.2), transparent 38%),
+    radial-gradient(ellipse at 92% 25%, rgba(34, 211, 238, 0.13), transparent 34%);
+}
+
+/* Make theme colors follow the selected mobile theme instead of fixed dark colors. */
+.vignify-mobile-root .mobile-app[data-mobile-theme] .mobile-header,
+.vignify-mobile-root .mobile-app[data-mobile-theme] .mobile-bottom-nav {
+  background: var(--mobile-bg);
+  color: var(--mobile-text);
+  border-color: var(--mobile-border);
+}
+
+.vignify-mobile-root .mobile-app[data-mobile-theme] .mobile-search-bar {
+  border-color: var(--mobile-border);
+  background: var(--mobile-surface);
+  color: var(--mobile-muted);
+}
+
+.vignify-mobile-root .mobile-app[data-mobile-theme] .mobile-search-bar input {
+  color: var(--mobile-text);
+}
+
+.vignify-mobile-root .mobile-app[data-mobile-theme] .mobile-search-bar input::placeholder {
+  color: var(--mobile-muted);
+}
+
+.vignify-mobile-root .mobile-app[data-mobile-theme] .mobile-wallpaper-card {
+  border-color: var(--mobile-border);
+  background: var(--mobile-surface);
+}
+
+.vignify-mobile-root .mobile-app[data-mobile-theme] .mobile-wallpaper-title,
+.vignify-mobile-root .mobile-app[data-mobile-theme] .mobile-wallpaper-rating,
+.vignify-mobile-root .mobile-app[data-mobile-theme] .mobile-category-label {
+  color: var(--mobile-text);
+}
+
+.vignify-mobile-root .mobile-app[data-mobile-theme="glass"] .mobile-wallpaper-card,
+.vignify-mobile-root .mobile-app[data-mobile-theme="glass"] .mobile-quick-menu,
+.vignify-mobile-root .mobile-app[data-mobile-theme="glass"] .mobile-notification-panel,
+.vignify-mobile-root .mobile-app[data-mobile-theme="glass"] .mobile-search-bar {
+  background: rgba(255, 255, 255, 0.075);
+  border-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+
+.vignify-mobile-root .mobile-app[data-mobile-theme="light"] .mobile-brand-name {
+  color: var(--mobile-text);
+  text-shadow: none;
+}
+
+.vignify-mobile-root .mobile-theme-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.vignify-mobile-root .mobile-theme-button {
+  display: grid;
+  width: 28px;
+  height: 32px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--mobile-text);
+}
+
+.vignify-mobile-root .mobile-theme-button[aria-expanded="true"] {
+  color: var(--mobile-accent);
+  background: var(--mobile-surface);
+}
+
+.vignify-mobile-root .mobile-theme-menu {
+  position: absolute;
+  top: 48px;
+  right: 44px;
+  z-index: 30;
+  display: grid;
+  min-width: 142px;
+  gap: 3px;
+  padding: 6px;
+  border: 1px solid var(--mobile-border);
+  border-radius: 13px;
+  background: var(--mobile-surface);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.vignify-mobile-root .mobile-theme-option {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 9px 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--mobile-text);
+  text-align: left;
+  font-size: 12px;
+}
+
+.vignify-mobile-root .mobile-theme-option[aria-checked="true"] {
+  background: var(--mobile-surface-raised);
+  color: var(--mobile-accent);
+}
+
+.vignify-mobile-root .mobile-app[data-mobile-theme="glass"] .mobile-theme-menu {
+  background: rgba(20, 25, 42, 0.88);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+/* Vigniti Screen 01 â€” Splash screen */
+.vignify-mobile-root .vignify-splash {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  isolation: isolate;
+  padding:
+    calc(24px + env(safe-area-inset-top)) 28px calc(30px + env(safe-area-inset-bottom));
+  background: var(--mobile-bg);
+  color: var(--mobile-text);
+}
+
+.vignify-mobile-root .vignify-splash-glow {
+  position: absolute;
+  z-index: -1;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.2;
+  pointer-events: none;
+  animation: vignify-splash-breathe 3s ease-in-out infinite alternate;
+}
+
+.vignify-mobile-root .vignify-splash-glow-pink {
+  top: 24%;
+  left: -115px;
+  background: #ec4899;
+}
+
+.vignify-mobile-root .vignify-splash-glow-cyan {
+  right: -115px;
+  bottom: 23%;
+  background: #22d3ee;
+  animation-delay: 800ms;
+}
+
+.vignify-mobile-root .vignify-splash-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: vignify-splash-appear 800ms ease both;
+}
+
+.vignify-mobile-root .vignify-splash-logo {
+  position: relative;
+  width: 90px;
+  height: 100px;
+  filter:
+    drop-shadow(0 0 12px rgb(236 72 153 / 30%)) drop-shadow(0 0 18px rgb(34 211 238 / 20%));
+  animation: vignify-splash-logo-pulse 2.2s ease-in-out infinite;
+}
+
+.vignify-mobile-root .vignify-splash-wing {
+  position: absolute;
+  top: 10px;
+  width: 28px;
+  height: 78px;
+  border-radius: 18px;
+}
+
+.vignify-mobile-root .vignify-splash-wing-pink {
+  left: 17px;
+  transform: rotate(-27deg);
+  background: linear-gradient(180deg, #ff8ce8, #ec4899 52%, #9333ea);
+}
+
+.vignify-mobile-root .vignify-splash-wing-cyan {
+  right: 17px;
+  transform: rotate(27deg);
+  background: linear-gradient(180deg, #a5f3fc, #22d3ee 48%, #6366f1);
+}
+
+.vignify-mobile-root .vignify-splash-wordmark {
+  margin: 22px 0 0;
+  color: var(--mobile-text);
+  font-size: 42px;
+  font-weight: 850;
+  letter-spacing: -2px;
+  line-height: 1.1;
+}
+
+.vignify-mobile-root .vignify-splash-tagline {
+  margin: 12px 0 0;
+  color: var(--mobile-muted);
+  font-size: 14px;
+  letter-spacing: 1.2px;
+}
+
+.vignify-mobile-root .vignify-splash-loader {
+  position: absolute;
+  right: 32px;
+  bottom: calc(54px + env(safe-area-inset-bottom));
+  left: 32px;
+  max-width: 320px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.vignify-mobile-root .vignify-splash-track {
+  height: 4px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: var(--mobile-surface-raised);
+}
+
+.vignify-mobile-root .vignify-splash-progress {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ec4899, #a855f7, #22d3ee);
+  box-shadow: 0 0 12px rgb(168 85 247 / 45%);
+  transition: width 80ms linear;
+}
+
+.vignify-mobile-root .vignify-splash-loader p {
+  margin: 13px 0 0;
+  color: var(--mobile-muted);
+  font-size: 12px;
+  letter-spacing: 0.3px;
+}
+
+.vignify-mobile-root .mobile-app[data-mobile-theme="glass"] .vignify-splash {
+  background:
+    radial-gradient(ellipse at 15% 20%, rgb(168 85 247 / 13%), transparent 40%),
+    radial-gradient(ellipse at 85% 80%, rgb(34 211 238 / 10%), transparent 40%),
+    var(--mobile-bg);
+}
+
+@keyframes vignify-splash-appear {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes vignify-splash-breathe {
+  from {
+    opacity: 0.12;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 0.26;
+    transform: scale(1.12);
+  }
+}
+
+@keyframes vignify-splash-logo-pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.045);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .vignify-mobile-root .vignify-splash *,
+  .vignify-mobile-root .vignify-splash-glow {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+
+/* Wallpaper of the Day */
+.vignify-mobile-root .mobile-daily-section {
+  margin-top: 24px;
+}
+
+.vignify-mobile-root .mobile-daily-section .mobile-section-heading h2 {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.vignify-mobile-root .mobile-daily-section .mobile-section-heading h2 svg {
+  color: #b76aff;
+}
+
+.vignify-mobile-root .mobile-daily-badge {
+  padding: 5px 9px;
+  border: 1px solid rgb(168 85 247 / 25%);
+  border-radius: 999px;
+  background: rgb(168 85 247 / 9%);
+  color: #a855f7;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  white-space: nowrap;
+}
+
+.vignify-mobile-root .mobile-daily-card {
+  overflow: hidden;
+  border: 1px solid var(--mobile-border);
+  border-radius: 18px;
+  background: var(--mobile-surface);
+}
+
+.vignify-mobile-root .mobile-daily-image {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: 190px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: #17152b;
+  background-position: center 45%;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.vignify-mobile-root .mobile-daily-image::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 5%) 35%,
+    rgb(0 0 0 / 55%) 100%
+  );
+  content: "";
+}
+
+.vignify-mobile-root .mobile-daily-image-label {
+  position: absolute;
+  z-index: 1;
+  bottom: 14px;
+  left: 14px;
+  padding: 6px 10px;
+  border: 1px solid rgb(255 255 255 / 35%);
+  border-radius: 999px;
+  background: rgb(12 12 22 / 55%);
+  color: white;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.vignify-mobile-root .mobile-daily-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px;
+}
+
+.vignify-mobile-root .mobile-daily-copy {
+  min-width: 0;
+}
+
+.vignify-mobile-root .mobile-daily-category {
+  color: #a855f7;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.vignify-mobile-root .mobile-daily-copy h3 {
+  margin: 4px 0;
+  color: var(--mobile-text);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.vignify-mobile-root .mobile-daily-copy p {
+  margin: 0;
+  color: var(--mobile-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.vignify-mobile-root .mobile-daily-save {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  place-items: center;
+  border: 1px solid var(--mobile-border);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--mobile-text);
+}
+
+.vignify-mobile-root .mobile-daily-save.is-saved {
+  color: #ec4899;
+}
+
+.vignify-mobile-root .mobile-daily-view-button {
+  display: flex;
+  width: calc(100% - 28px);
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin: 0 14px 14px;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(100deg, #ec4899, #9333ea);
+  color: white;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+@media (max-width: 360px) {
+  .vignify-mobile-root .mobile-daily-image {
+    min-height: 160px;
+  }
+
+  .vignify-mobile-root .mobile-daily-copy h3 {
+    font-size: 16px;
+  }
+}
+
+/* ==========================================
+   VIGNIFY HOME HERO â€” REALISTIC 3D ANIMATION
+   ========================================== */
+
+.mobile-hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: 168px;
+  margin: 8px 14px 18px;
+  padding: 18px 15px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 23px;
+  background: linear-gradient(112deg, #ff790d 0%, #ff367b 46%, #a12cff 100%);
+  box-shadow: 0 12px 32px rgba(164, 38, 255, 0.15);
+}
+
+.mobile-hero-glow {
+  position: absolute;
+  z-index: -1;
+  top: -65px;
+  right: -30px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: rgba(107, 42, 255, 0.7);
+  filter: blur(40px);
+  animation: vignify-hero-glow 5s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.mobile-hero-orb {
+  position: absolute;
+  z-index: -1;
+  right: 20%;
+  bottom: -90px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: rgba(255, 186, 65, 0.4);
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+.mobile-hero-content {
+  position: relative;
+  z-index: 3;
+  width: 59%;
+  min-width: 0;
+  animation: vignify-hero-copy-enter 650ms ease-out both;
+}
+
+.mobile-hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+}
+
+.mobile-hero-content h1 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(22px, 6vw, 29px);
+  font-weight: 850;
+  line-height: 1.06;
+  letter-spacing: -0.8px;
+}
+
+.mobile-hero-content p {
+  max-width: 165px;
+  margin: 8px 0 12px;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.mobile-hero-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 34px;
+  padding: 4px 5px 4px 13px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  background: #100d1b;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.mobile-hero-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 18px rgba(24, 7, 44, 0.35);
+}
+
+.mobile-hero-button:active {
+  transform: scale(0.96);
+}
+
+.mobile-hero-arrow {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e45aff, #8b35ff);
+  color: #fff;
+  transition: transform 220ms ease;
+}
+
+.mobile-hero-button:hover .mobile-hero-arrow {
+  transform: translateX(2px);
+}
+
+/* Artwork area */
+.mobile-hero-art {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 47%;
+  perspective: 700px;
+  pointer-events: none;
+}
+
+.mobile-hero-phones {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 145%;
+  max-width: none;
+  height: auto;
+  object-fit: contain;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+  filter: drop-shadow(0 12px 12px rgba(31, 8, 52, 0.4));
+  animation: vignify-hero-phone-float 5s ease-in-out infinite;
+  will-change: transform;
+  user-select: none;
+}
+
+.mobile-hero-ring {
+  position: absolute;
+  top: 50%;
+  left: 52%;
+  width: 105px;
+  height: 105px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotateX(62deg);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
+  animation: vignify-hero-ring 14s linear infinite;
+}
+
+.mobile-hero-sparkle {
+  position: absolute;
+  color: #fff;
+  filter: drop-shadow(0 0 7px rgba(255, 255, 255, 0.9));
+  animation: vignify-hero-sparkle 2.8s ease-in-out infinite;
+}
+
+.mobile-hero-sparkle-one {
+  top: 16%;
+  right: 12%;
+}
+
+.mobile-hero-sparkle-two {
+  right: 68%;
+  bottom: 20%;
+  animation-delay: 1s;
+}
+
+.mobile-hero-light {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 8px #fff, 0 0 16px #d94cff;
+  animation: vignify-hero-light 3s ease-in-out infinite alternate;
+}
+
+.mobile-hero-light-one {
+  top: 25%;
+  left: 10%;
+}
+
+.mobile-hero-light-two {
+  right: 12%;
+  bottom: 17%;
+  animation-delay: 1.4s;
+}
+
+/* Keyframes */
+@keyframes vignify-hero-phone-float {
+  0%, 100% {
+    transform: translate(-50%, -48%) rotate(-2deg) rotateY(-4deg);
+  }
+  50% {
+    transform: translate(-50%, -53%) rotate(2deg) rotateY(4deg);
+  }
+}
+
+@keyframes vignify-hero-ring {
+  from {
+    transform: translate(-50%, -50%) rotateX(62deg) rotateZ(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotateX(62deg) rotateZ(360deg);
+  }
+}
+
+@keyframes vignify-hero-glow {
+  from {
+    opacity: 0.55;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes vignify-hero-sparkle {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(0.8) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(18deg);
+  }
+}
+
+@keyframes vignify-hero-light {
+  from {
+    opacity: 0.3;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+}
+
+@keyframes vignify-hero-copy-enter {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Small-screen layout */
+@media (max-width: 360px) {
+  .mobile-hero {
+    min-height: 155px;
+    margin-inline: 10px;
+    padding-inline: 12px;
+  }
+
+  .mobile-hero-content {
+    width: 61%;
+  }
+
+  .mobile-hero-content h1 {
+    font-size: 21px;
+  }
+
+  .mobile-hero-phones {
+    width: 155%;
+  }
+}
+
+/* Reduced-motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .mobile-hero-glow,
+  .mobile-hero-phones,
+  .mobile-hero-ring,
+  .mobile-hero-sparkle,
+  .mobile-hero-light,
+  .mobile-hero-content {
+    animation: none !important;
+  }
+
+  .mobile-hero-button,
+  .mobile-hero-arrow {
+    transition: none !important;
+  }
+}
+
+
+/* =========================================
+   VIGNIFY HERO â€” 3D PHONE LAYOUT FIX
+   ========================================= */
+
+.vignify-mobile-root .mobile-hero {
+  position: relative;
+  min-height: 250px;
+  padding: 22px 18px;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(
+    112deg,
+    #ff790d 0%,
+    #ff367b 46%,
+    #a12cff 100%
+  );
+}
+
+/* Keep the text readable on the left */
+.vignify-mobile-root .mobile-hero-content {
+  position: relative;
+  z-index: 4;
+  width: 59%;
+  max-width: 280px;
+}
+
+/* Keep all phone artwork inside the right side */
+.vignify-mobile-root .mobile-hero-art {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 43%;
+  height: auto;
+  overflow: hidden;
+  perspective: 700px;
+  pointer-events: none;
+}
+
+/* Remove the oversized minimum height from the 3D canvas */
+.vignify-mobile-root .three-d-phone-hero {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 0;
+  background: transparent;
+  pointer-events: auto;
+}
+
+/* Let the canvas fill the artwork area */
+.vignify-mobile-root .three-d-phone-hero canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Prevent old artwork effects from crowding the phones */
+.vignify-mobile-root .mobile-hero-ring {
+  width: 105px;
+  height: 105px;
+  left: 50%;
+  opacity: 0.45;
+}
+
+/* Hide the old image if any legacy rule still displays it */
+.vignify-mobile-root .mobile-hero-phones {
+  display: none;
+}
+
+/* Small-screen adjustments */
+@media (max-width: 380px) {
+  .vignify-mobile-root .mobile-hero {
+    min-height: 235px;
+    padding: 18px 14px;
+  }
+
+  .vignify-mobile-root .mobile-hero-content {
+    width: 61%;
+  }
+
+  .vignify-mobile-root .mobile-hero-art {
+    width: 42%;
+  }
+}
+
+/* Short-screen devices */
+@media (max-height: 700px) {
+  .vignify-mobile-root .mobile-hero {
+    min-height: 225px;
+  }
+}
+
+
+
+/* Vigniti 3D hero: seamless background and contained phones */
+.vignify-mobile-root .mobile-hero-art {
+  background: transparent !important;
+  background-color: transparent !important;
+  overflow: hidden;
+}
+
+.vignify-mobile-root .three-d-phone-hero {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  min-height: 0 !important;
+}
+
+.vignify-mobile-root .three-d-phone-hero canvas {
+  background: transparent !important;
+}
+
+/* Remove the old central artwork ring */
+.vignify-mobile-root .mobile-hero-ring {
+  display: none !important;
+}
+
+/* Keep the phone artwork on the right without a rectangular panel */
+.vignify-mobile-root .three-d-phone-hero,
+.vignify-mobile-root .three-d-phone-vignette {
+  border-radius: 0 !important;
+}
+
+.vignify-mobile-root .three-d-phone-vignette {
+  background: linear-gradient(
+    90deg,
+    rgb(255 55 125 / 8%),
+    transparent 22%,
+    transparent 88%,
+    rgb(112 44 255 / 8%)
+  ) !important;
+}
+
+/* ── Upload Success Screen ──────────────────────────────────── */
+
+.vignify-mobile-root .mobile-upload-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  text-align: center;
+  gap: 14px;
+}
+
+.vignify-mobile-root .uc-success-icon {
+  display: grid;
+  width: 88px;
+  height: 88px;
+  place-items: center;
+  border-radius: 50%;
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.12);
+  margin-bottom: 6px;
+}
+
+.vignify-mobile-root .uc-success-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  color: #f4f4ff;
+}
+
+.vignify-mobile-root .uc-success-body {
+  margin: 0;
+  color: #9899b8;
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 280px;
+}
+
+.vignify-mobile-root .uc-success-primary {
+  width: 100%;
+  max-width: 300px;
+  min-height: 52px;
+  border: none;
+  border-radius: 15px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  background: linear-gradient(100deg, #7c3aed, #a855f7 55%, #ec4899);
+  box-shadow: 0 6px 20px rgba(139,92,246,0.35);
+  cursor: pointer;
+  margin-top: 8px;
+  transition: transform 150ms ease;
+}
+
+.vignify-mobile-root .uc-success-primary:active { transform: scale(0.97); }
+
+.vignify-mobile-root .uc-success-secondary {
+  width: 100%;
+  max-width: 300px;
+  min-height: 52px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 15px;
+  color: #f4f4ff;
+  font-size: 15px;
+  font-weight: 600;
+  background: rgba(255,255,255,0.05);
+  cursor: pointer;
+  transition: background 150ms ease;
+}
+
+.vignify-mobile-root .uc-success-secondary:hover { background: rgba(255,255,255,0.09); }
+
+/* ── Library Screen ─────────────────────────────────────────── */
+
+.vignify-mobile-root .mobile-library {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 100px;
+}
+
+.vignify-mobile-root .mobile-library-header {
+  padding: 16px 16px 0;
+}
+
+.vignify-mobile-root .mobile-library-header h1 {
+  margin: 0 0 14px;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--mobile-text);
+  letter-spacing: -0.5px;
+}
+
+/* Category filter tabs */
+.vignify-mobile-root .mobile-library-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  scrollbar-width: none;
+}
+
+.vignify-mobile-root .mobile-library-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.vignify-mobile-root .mobile-library-tab {
+  flex: 0 0 auto;
+  padding: 7px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  color: var(--mobile-muted);
+  font-size: 13px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 150ms ease, color 150ms ease, border-color 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.vignify-mobile-root .mobile-library-tab.active {
+  border-color: rgba(139, 92, 246, 0.6);
+  color: #c084fc;
+  background: rgba(139, 92, 246, 0.12);
+}
+
+/* Empty state */
+.vignify-mobile-root .mobile-library-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 60px 24px;
+  color: var(--mobile-muted);
+  font-size: 14px;
+  text-align: center;
+}
+
+.vignify-mobile-root .mobile-library-upload-btn {
+  padding: 12px 28px;
+  border: none;
+  border-radius: 14px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  background: linear-gradient(100deg, #7c3aed, #a855f7 55%, #ec4899);
+  box-shadow: 0 4px 18px rgba(139, 92, 246, 0.35);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Grid */
+.vignify-mobile-root .mobile-library-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  padding: 4px 0 0;
+}
+
+.vignify-mobile-root .mobile-library-card {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+}
+
+.vignify-mobile-root .mobile-library-card-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 220ms ease;
+}
+
+.vignify-mobile-root .mobile-library-card:hover .mobile-library-card-img {
+  transform: scale(1.04);
+}
+
+/* Placeholder when no preview (audio, zip) */
+.vignify-mobile-root .mobile-library-card-placeholder {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(139,92,246,0.25), rgba(236,72,153,0.25));
+  font-size: 28px;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Card overlay info on hover */
+.vignify-mobile-root .mobile-library-card-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 8px 8px;
+  background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.vignify-mobile-root .mobile-library-card:hover .mobile-library-card-info {
+  opacity: 1;
+}
+
+.vignify-mobile-root .mobile-library-card-title {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vignify-mobile-root .mobile-library-card-cat {
+  margin: 2px 0 0;
+  font-size: 10px;
+  color: rgba(255,255,255,0.6);
+}
+
+/* ── Library sections ──────────────────────────────────────── */
+
+.vignify-mobile-root .mobile-library-section {
+  padding: 0 16px 20px;
+}
+
+.vignify-mobile-root .mobile-library-section-title {
+  margin: 0 0 12px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--mobile-muted);
+}
+
+.vignify-mobile-root .mobile-library-themes-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* JSON loader label */
+.vignify-mobile-root .vt-theme-json-loader {
+  display: block;
+  cursor: pointer;
+}
+
+.vignify-mobile-root .vt-theme-json-loader input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.vignify-mobile-root .vt-theme-load-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  padding: 7px 14px;
+  border: 1px dashed var(--mobile-border);
+  border-radius: 10px;
+  color: var(--mobile-muted);
+  font-size: 12px;
+  background: transparent;
+}
+
+/* Custom theme variable support for nav + header */
+.vignify-mobile-root .mobile-app[data-mobile-theme="custom"] .mobile-header {
+  background: var(--mobile-header-bg, var(--mobile-bg));
+  border-color: var(--mobile-border);
+  color: var(--mobile-text);
+}
+
+.vignify-mobile-root .mobile-app[data-mobile-theme="custom"] .mobile-bottom-nav {
+  background: var(--mobile-nav-bg, var(--mobile-bg));
+  border-color: var(--mobile-border);
+}
+
+.vignify-mobile-root .mobile-app[data-mobile-theme="custom"] .mobile-search-bar {
+  border-color: var(--mobile-border);
+  background: var(--mobile-search-bg, var(--mobile-surface));
+  color: var(--mobile-text);
+}
+
+.vignify-mobile-root .mobile-app[data-mobile-theme="custom"] .mobile-search-bar input {
+  color: var(--mobile-text);
+}
+
+.vignify-mobile-root .mobile-app[data-mobile-theme="custom"] .mobile-wallpaper-card {
+  border-color: var(--mobile-border);
+  background: var(--mobile-surface);
+}
+
+.vignify-mobile-root .mobile-app[data-mobile-theme="custom"] .mobile-hero {
+  background: var(--mobile-hero-gradient,
+    linear-gradient(112deg, #ff790d 0%, #ff367b 46%, #a12cff 100%));
+}
+
+.vignify-mobile-root .mobile-app[data-mobile-theme="custom"] .mobile-wallpaper-title,
+.vignify-mobile-root .mobile-app[data-mobile-theme="custom"] .mobile-category-label,
+.vignify-mobile-root .mobile-app[data-mobile-theme="custom"] .mobile-brand-name {
+  color: var(--mobile-text);
+}
+
+.vignify-mobile-root .mobile-app[data-mobile-theme="custom"] .mobile-wallpaper-rating {
+  color: var(--mobile-muted);
+}
+
+.vignify-mobile-root .mobile-app[data-mobile-theme="custom"] .mobile-upload-content-cta {
+  backdrop-filter: var(--mobile-backdrop, none);
+}

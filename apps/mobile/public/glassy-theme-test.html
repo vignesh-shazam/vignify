@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glassy Theme Test</title>
+  <link rel="stylesheet" href="../src/features/mobile/styles/glassy/styles.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    
+    h2 {
+      color: #ffffff;
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+    
+    p {
+      color: rgba(255,255,255,0.7);
+      font-size: 14px;
+    }
+    
+    .section {
+      margin-bottom: 24px;
+    }
+  </style>
+</head>
+<body class="glass-background">
+  <div class="container">
+    <!-- Header -->
+    <div class="glass-card" style="padding: 20px; margin-bottom: 20px;">
+      <h1>Glassy Theme Test</h1>
+      <p>Preview all glassmorphism components</p>
+    </div>
+
+    <!-- Glass Cards -->
+    <div class="section">
+      <h2>Glass Cards</h2>
+      <div class="glass-card" style="padding: 16px; margin-bottom: 12px;">
+        <h3 style="color: #ffffff; font-size: 16px; margin: 0 0 8px 0;">Basic Card</h3>
+        <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin: 0;">
+          This is a glass card with blur effect
+        </p>
+      </div>
+      
+      <div class="glass-card" style="padding: 16px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, #8B2CFF, #176DFF); display: flex; align-items: center; justify: center; color: white; font-weight: bold;">
+            U
+          </div>
+          <div>
+            <h3 style="color: #ffffff; font-size: 16px; margin: 0 0 4px 0;">User Profile</h3>
+            <p style="color: rgba(255,255,255,0.5); font-size: 12px; margin: 0;">Premium member</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Glass Buttons -->
+    <div class="section">
+      <h2>Glass Buttons</h2>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <button class="glass-button" style="padding: 12px 24px;">Primary</button>
+        <button class="glass-button" style="padding: 12px 24px; background: rgba(23, 109, 255, 0.3);">Secondary</button>
+        <button class="glass-button" style="padding: 12px 24px; background: rgba(240, 0, 232, 0.3);">Accent</button>
+      </div>
+    </div>
+
+    <!-- Glass Icons -->
+    <div class="section">
+      <h2>Glass Icons</h2>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <div class="glass-icon" style="padding: 16px;">
+          <span style="font-size: 24px;">⭐</span>
+        </div>
+        <div class="glass-icon" style="padding: 16px;">
+          <span style="font-size: 24px;">❤️</span>
+        </div>
+        <div class="glass-icon" style="padding: 16px;">
+          <span style="font-size: 24px;">⚙️</span>
+        </div>
+        <div class="glass-icon" style="padding: 16px;">
+          <span style="font-size: 24px;">🔔</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Glass Input -->
+    <div class="section">
+      <h2>Glass Input</h2>
+      <div class="glass-card" style="padding: 16px;">
+        <input class="glass-input" type="text" placeholder="Search..." style="width: 100%; margin-bottom: 12px;">
+        <input class="glass-input" type="text" placeholder="Email address" style="width: 100%;">
+      </div>
+    </div>
+
+    <!-- Glass Slider -->
+    <div class="section">
+      <h2>Glass Slider</h2>
+      <div class="glass-card" style="padding: 16px;">
+        <label style="color: #ffffff; font-size: 14px; margin-bottom: 8px; display: block;">Brightness</label>
+        <input type="range" class="glass-slider" value="50" style="width: 100%;">
+      </div>
+    </div>
+
+    <!-- Glass Toggles -->
+    <div class="section">
+      <h2>Glass Toggles</h2>
+      <div class="glass-card" style="padding: 16px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+          <span style="color: #ffffff; font-size: 14px;">Wi-Fi</span>
+          <div class="glass-toggle active" style="width: 50px; height: 28px;"></div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+          <span style="color: #ffffff; font-size: 14px;">Bluetooth</span>
+          <div class="glass-toggle" style="width: 50px; height: 28px;"></div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <span style="color: #ffffff; font-size: 14px;">Notifications</span>
+          <div class="glass-toggle active" style="width: 50px; height: 28px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Glass Notification -->
+    <div class="section">
+      <h2>Glass Notification</h2>
+      <div class="glass-notification" style="margin-bottom: 12px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, #8B2CFF, #176DFF); display: flex; align-items: center; justify: center;">
+            <span style="font-size: 20px;">🔔</span>
+          </div>
+          <div style="flex: 1;">
+            <h4 style="color: #ffffff; font-size: 14px; margin: 0 0 4px 0;">New Message</h4>
+            <p style="color: rgba(255,255,255,0.7); font-size: 12px; margin: 0;">You have a new notification</p>
+          </div>
+          <span style="color: rgba(255,255,255,0.5); font-size: 12px;">2m ago</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Glass Progress -->
+    <div class="section">
+      <h2>Glass Progress</h2>
+      <div class="glass-card" style="padding: 16px;">
+        <div style="margin-bottom: 12px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+            <span style="color: #ffffff; font-size: 14px;">Download</span>
+            <span style="color: rgba(255,255,255,0.7); font-size: 14px;">75%</span>
+          </div>
+          <div class="glass-progress" style="height: 8px;">
+            <div class="glass-progress-bar" style="width: 75%;"></div>
+          </div>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+            <span style="color: #ffffff; font-size: 14px;">Upload</span>
+            <span style="color: rgba(255,255,255,0.7); font-size: 14px;">45%</span>
+          </div>
+          <div class="glass-progress" style="height: 8px;">
+            <div class="glass-progress-bar" style="width: 45%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Glass Badges -->
+    <div class="section">
+      <h2>Glass Badges</h2>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <span class="glass-badge">New</span>
+        <span class="glass-badge" style="background: #176DFF;">Pro</span>
+        <span class="glass-badge" style="background: #F000E8;">Hot</span>
+        <span class="glass-badge" style="background: #22d3ee;">Beta</span>
+      </div>
+    </div>
+
+    <!-- Glass Chips -->
+    <div class="section">
+      <h2>Glass Chips</h2>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <span class="glass-chip active">All</span>
+        <span class="glass-chip">Wallpapers</span>
+        <span class="glass-chip">Themes</span>
+        <span class="glass-chip">Icons</span>
+        <span class="glass-chip">Ringtones</span>
+      </div>
+    </div>
+
+    <!-- Glass Avatar -->
+    <div class="section">
+      <h2>Glass Avatar</h2>
+      <div style="display: flex; gap: 12px;">
+        <div class="glass-avatar" style="width: 40px; height: 40px; font-size: 14px;">A</div>
+        <div class="glass-avatar" style="width: 48px; height: 48px; font-size: 18px;">B</div>
+        <div class="glass-avatar" style="width: 56px; height: 56px; font-size: 22px;">C</div>
+      </div>
+    </div>
+
+    <!-- Glass Divider -->
+    <div class="glass-divider" style="margin-bottom: 20px;"></div>
+
+    <!-- Footer -->
+    <div class="glass-card" style="padding: 16px; text-align: center;">
+      <p style="color: rgba(255,255,255,0.5); font-size: 12px; margin: 0;">
+        Glassy Theme Test © 2024 Vignify
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // Toggle functionality
+    document.querySelectorAll('.glass-toggle').forEach(toggle => {
+      toggle.addEventListener('click', function() {
+        this.classList.toggle('active');
+      });
+    });
+
+    // Slider value display
+    document.querySelectorAll('.glass-slider').forEach(slider => {
+      slider.addEventListener('input', function() {
+        const label = this.previousElementSibling;
+        if (label) {
+          const valueSpan = label.querySelector('span:last-child');
+          if (valueSpan) {
+            valueSpan.textContent = this.value + '%';
+          }
+        }
+      });
+    });
+
+    // Chip selection
+    document.querySelectorAll('.glass-chip').forEach(chip => {
+      chip.addEventListener('click', function() {
+        document.querySelectorAll('.glass-chip').forEach(c => c.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

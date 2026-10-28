@@ -1,0 +1,60 @@
+{
+  "name": "Glassy Theme",
+  "version": "1.0.0",
+  "description": "Premium glassmorphism mobile theme with frosted glass effects",
+  "author": "Vignify",
+  "type": "mobile",
+  "features": [
+    "glassmorphism",
+    "frosted-glass",
+    "botanical-backgrounds",
+    "dark-mode",
+    "glossy-icons",
+    "blur-effects"
+  ],
+  "colors": {
+    "primary": "#8B2CFF",
+    "secondary": "#176DFF",
+    "accent": "#F000E8",
+    "background": "#0a0a0f",
+    "surface": "rgba(255, 255, 255, 0.1)",
+    "surface-elevated": "rgba(255, 255, 255, 0.15)",
+    "text": "#ffffff",
+    "text-secondary": "rgba(255, 255, 255, 0.7)",
+    "text-muted": "rgba(255, 255, 255, 0.5)",
+    "border": "rgba(255, 255, 255, 0.2)",
+    "blur": "20px"
+  },
+  "components": {
+    "glass-card": {
+      "background": "rgba(255, 255, 255, 0.1)",
+      "backdrop-filter": "blur(20px)",
+      "border": "1px solid rgba(255, 255, 255, 0.2)",
+      "border-radius": "16px"
+    },
+    "glass-button": {
+      "background": "rgba(255, 255, 255, 0.15)",
+      "backdrop-filter": "blur(10px)",
+      "border": "1px solid rgba(255, 255, 255, 0.3)",
+      "border-radius": "12px"
+    },
+    "glass-icon": {
+      "background": "linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05))",
+      "backdrop-filter": "blur(10px)",
+      "border": "1px solid rgba(255, 255, 255, 0.3)",
+      "border-radius": "14px",
+      "shadow": "0 8px 32px rgba(0, 0, 0, 0.3)"
+    }
+  },
+  "screens": [
+    "lock-screen",
+    "home-screen",
+    "control-center",
+    "settings",
+    "dialer",
+    "messages",
+    "notifications",
+    "volume-panel",
+    "recent-apps"
+  ]
+}

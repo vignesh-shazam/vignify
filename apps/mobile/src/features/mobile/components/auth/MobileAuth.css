@@ -1,0 +1,567 @@
+
+.vignify-auth {
+  --auth-bg: #080812;
+  --auth-surface: #151426;
+  --auth-text: #ffffff;
+  --auth-muted: #a8a6c3;
+  --auth-purple: #762bff;
+  --auth-pink: #f12ccb;
+  --auth-orange: #ff7a25;
+  position: relative;
+  min-height: 100dvh;
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--auth-text);
+  background:
+    radial-gradient(ellipse at 80% 12%, rgb(118 43 255 / 13%), transparent 40%),
+    radial-gradient(ellipse at 5% 55%, rgb(241 44 203 / 7%), transparent 38%),
+    var(--auth-bg);
+  font-family: inherit;
+}
+
+.vignify-auth * {
+  box-sizing: border-box;
+}
+
+.vignify-auth button,
+.vignify-auth input {
+  font: inherit;
+}
+
+.vignify-auth button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.vignify-auth-scroll {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 480px);
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: max(16px, env(safe-area-inset-top)) 24px
+    max(26px, env(safe-area-inset-bottom));
+}
+
+.vignify-auth-orb {
+  position: absolute;
+  z-index: -1;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.18;
+  pointer-events: none;
+  animation: vignify-auth-drift 12s ease-in-out infinite alternate;
+}
+
+.vignify-auth-orb-one {
+  top: 8%;
+  right: -140px;
+  background: var(--auth-purple);
+}
+
+.vignify-auth-orb-two {
+  top: 45%;
+  left: -180px;
+  background: var(--auth-pink);
+  animation-delay: -5s;
+}
+
+.vignify-auth-grain {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.07;
+  pointer-events: none;
+  background-image: radial-gradient(#fff 0.5px, transparent 0.5px);
+  background-size: 7px 7px;
+  mask-image: linear-gradient(transparent, black 20%, black 80%, transparent);
+}
+
+.vignify-auth-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+}
+
+.vignify-auth-brand-icon,
+.vignify-auth-back {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 13px;
+  color: #fff;
+  background: rgb(255 255 255 / 5%);
+}
+
+.vignify-auth-back {
+  cursor: pointer;
+}
+
+.vignify-auth-brand {
+  font-size: 13px;
+  font-weight: 850;
+  letter-spacing: 0.2em;
+}
+
+.vignify-auth-secure {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+  color: #b6f5d6;
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+}
+
+.vignify-auth-art {
+  position: relative;
+  display: grid;
+  height: 190px;
+  margin: 8px -5px 4px;
+  place-items: center;
+  perspective: 800px;
+}
+
+.vignify-auth-art-glow {
+  position: absolute;
+  width: 190px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(110deg, var(--auth-orange), var(--auth-pink), var(--auth-purple));
+  filter: blur(55px);
+  opacity: 0.42;
+  animation: vignify-auth-pulse 5s ease-in-out infinite;
+}
+
+.vignify-auth-wallpaper-card {
+  position: relative;
+  width: 138px;
+  height: 170px;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 28%);
+  border-radius: 20px;
+  background:
+    radial-gradient(ellipse at 50% 28%, rgb(255 122 37 / 80%), transparent 25%),
+    linear-gradient(150deg, #321b64 0%, #17152f 46%, #080812 100%);
+  box-shadow:
+    0 25px 55px rgb(0 0 0 / 55%),
+    0 0 35px rgb(241 44 203 / 24%),
+    inset 0 0 0 4px rgb(255 255 255 / 3%);
+  transform: rotateY(-12deg) rotateZ(-7deg);
+  animation: vignify-auth-float 6s ease-in-out infinite;
+}
+
+.vignify-auth-wallpaper-stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 22% 20%, white 1px, transparent 2px),
+    radial-gradient(circle at 76% 13%, #ffc8e9 1px, transparent 2px),
+    radial-gradient(circle at 65% 36%, white 1px, transparent 2px),
+    radial-gradient(circle at 34% 42%, #ffc8e9 1px, transparent 2px);
+}
+
+.vignify-auth-wallpaper-moon {
+  position: absolute;
+  top: 26px;
+  right: 25px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fff4da, #ff83b8);
+  box-shadow: 0 0 24px rgb(255 122 37 / 55%);
+}
+
+.vignify-auth-wallpaper-mountain {
+  position: absolute;
+  right: -20px;
+  bottom: 38px;
+  left: -20px;
+  height: 78px;
+  border-radius: 50% 50% 0 0;
+  transform: rotate(-13deg);
+}
+
+.mountain-back {
+  bottom: 28px;
+  background: linear-gradient(130deg, #8534d9, #332060);
+}
+
+.mountain-front {
+  bottom: -24px;
+  height: 100px;
+  background: linear-gradient(140deg, #f12ccb, #762bff 48%, #111026);
+}
+
+.vignify-auth-wallpaper-caption {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  left: 12px;
+  display: grid;
+  gap: 4px;
+}
+
+.vignify-auth-wallpaper-caption span {
+  color: #e5d4ff;
+  font-size: 6px;
+  font-weight: 800;
+  letter-spacing: 0.17em;
+}
+
+.vignify-auth-wallpaper-caption strong {
+  font-size: 10px;
+}
+
+.vignify-auth-floating-chip {
+  position: absolute;
+  right: calc(50% - 112px);
+  bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 11px;
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 12px;
+  color: #fff;
+  background: rgb(24 21 43 / 88%);
+  box-shadow: 0 8px 28px rgb(0 0 0 / 25%);
+  font-size: 10px;
+  backdrop-filter: blur(16px);
+  animation: vignify-auth-float 5s ease-in-out -2s infinite;
+}
+
+.vignify-auth-floating-chip svg {
+  color: #ffb3e7;
+}
+
+.vignify-auth-content {
+  animation: vignify-auth-enter 0.6s ease both;
+}
+
+.vignify-auth-eyebrow {
+  margin: 0 0 8px;
+  color: #d69cff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.19em;
+}
+
+.vignify-auth-content h1 {
+  margin: 0;
+  font-size: clamp(31px, 8vw, 39px);
+  font-weight: 800;
+  letter-spacing: -0.055em;
+  line-height: 1.1;
+}
+
+.vignify-auth-content h1 span {
+  color: transparent;
+  background: linear-gradient(100deg, #ff8a37, #f12ccb 48%, #a66aff);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.vignify-auth-subtitle {
+  margin: 10px 0 19px;
+  color: var(--auth-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.vignify-auth-switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  padding: 4px;
+  border: 1px solid rgb(255 255 255 / 6%);
+  border-radius: 14px;
+  background: rgb(255 255 255 / 3%);
+}
+
+.vignify-auth-switch button {
+  min-height: 39px;
+  border: 0;
+  border-radius: 10px;
+  color: var(--auth-muted);
+  background: transparent;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.vignify-auth-switch button.active {
+  color: #fff;
+  background: linear-gradient(110deg, #7e35f3, #bd31cb);
+  box-shadow: 0 4px 16px rgb(118 43 255 / 25%);
+}
+
+.vignify-auth-form {
+  display: grid;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.vignify-auth-field {
+  display: grid;
+  gap: 8px;
+  color: #dedbed;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.vignify-auth-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 49px;
+  padding: 0 13px;
+  border: 1px solid rgb(185 174 220 / 14%);
+  border-radius: 13px;
+  color: #9c8bbd;
+  background: linear-gradient(120deg, rgb(255 255 255 / 5%), rgb(255 255 255 / 2%));
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.vignify-auth-input-wrap:focus-within {
+  border-color: rgb(183 100 255 / 75%);
+  box-shadow: 0 0 0 3px rgb(118 43 255 / 13%), 0 0 22px rgb(118 43 255 / 8%);
+}
+
+.vignify-auth-input-wrap input {
+  width: 100%;
+  min-width: 0;
+  min-height: 45px;
+  padding: 0;
+  border: 0;
+  outline: none;
+  color: #fff;
+  background: transparent;
+  font-size: 13px;
+}
+
+.vignify-auth-input-wrap input::placeholder {
+  color: #77738f;
+}
+
+.vignify-auth-eye {
+  display: grid;
+  flex: 0 0 30px;
+  width: 30px;
+  height: 34px;
+  place-items: center;
+  border: 0;
+  color: #aaa1c6;
+  background: transparent;
+  cursor: pointer;
+}
+
+.vignify-auth-options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: -1px;
+}
+
+.vignify-auth-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: var(--auth-muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.vignify-auth-checkbox input {
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  accent-color: #b04cff;
+}
+
+.vignify-auth-text-button,
+.vignify-auth-footer button {
+  padding: 0;
+  border: 0;
+  color: #e5a2ff;
+  background: transparent;
+  font-size: 11px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.vignify-auth-strength {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: -8px;
+  color: #b9a8d6;
+  font-size: 10px;
+}
+
+.vignify-auth-strength-bars {
+  display: flex;
+  flex: 1;
+  gap: 5px;
+}
+
+.vignify-auth-strength-bars span {
+  height: 4px;
+  flex: 1;
+  border-radius: 99px;
+  background: #30283f;
+}
+
+.vignify-auth-strength-bars .level-1 {
+  background: #ff625d;
+}
+
+.vignify-auth-strength-bars .level-2 {
+  background: #ffb347;
+}
+
+.vignify-auth-strength-bars .level-3 {
+  background: #e1d15b;
+}
+
+.vignify-auth-strength-bars .level-4 {
+  background: #54e6ac;
+}
+
+.vignify-auth-terms {
+  margin-top: 2px;
+}
+
+.vignify-auth-feedback {
+  margin: 0;
+  padding: 11px 12px;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  font-size: 11px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.vignify-auth-feedback.error {
+  border-color: rgb(255 100 120 / 25%);
+  color: #ffb4c0;
+  background: rgb(255 70 105 / 8%);
+}
+
+.vignify-auth-feedback.success {
+  border-color: rgb(84 230 172 / 24%);
+  color: #9ef4cf;
+  background: rgb(84 230 172 / 7%);
+}
+
+.vignify-auth-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 51px;
+  margin-top: 3px;
+  border: 0;
+  border-radius: 14px;
+  color: #fff;
+  background: linear-gradient(105deg, #ff7a25, #f12ccb 53%, #762bff);
+  box-shadow: 0 8px 26px rgb(190 43 204 / 25%);
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.vignify-auth-submit:active {
+  transform: scale(0.985);
+}
+
+.vignify-auth-submit:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.vignify-auth-footer {
+  margin: 20px 0 0;
+  color: var(--auth-muted);
+  text-align: center;
+  font-size: 11px;
+}
+
+.vignify-auth-footer button {
+  font-size: inherit;
+}
+
+@keyframes vignify-auth-float {
+  0%, 100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -7px;
+  }
+}
+
+@keyframes vignify-auth-drift {
+  from {
+    transform: translate3d(0, -8px, 0) scale(0.9);
+  }
+  to {
+    transform: translate3d(-20px, 18px, 0) scale(1.1);
+  }
+}
+
+@keyframes vignify-auth-pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes vignify-auth-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 360px) {
+  .vignify-auth-scroll {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .vignify-auth-art {
+    height: 166px;
+  }
+
+  .vignify-auth-wallpaper-card {
+    width: 125px;
+    height: 151px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vignify-auth *,
+  .vignify-auth *::before,
+  .vignify-auth *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

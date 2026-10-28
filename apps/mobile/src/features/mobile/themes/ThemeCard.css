@@ -1,0 +1,150 @@
+/* ============================================================
+   Vigniti — Theme Card (Library view)
+   ============================================================ */
+
+.vt-theme-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--mobile-border, rgba(255,255,255,0.1));
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--mobile-surface, rgba(255,255,255,0.05));
+  transition: border-color 180ms ease, transform 180ms ease;
+}
+
+.vt-theme-card.is-active {
+  border-color: var(--mobile-accent, #a78bfa);
+  box-shadow: 0 0 0 1px var(--mobile-accent, #a78bfa),
+              0 6px 24px rgba(139,92,246,0.25);
+}
+
+/* Preview area */
+.vt-theme-preview {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: rgba(0,0,0,0.2);
+}
+
+.vt-theme-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.vt-theme-preview-placeholder {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  color: var(--mobile-muted, #a5a5bb);
+  background: var(--mobile-surface, rgba(255,255,255,0.05));
+}
+
+/* Color swatches row */
+.vt-theme-swatches {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  display: flex;
+  gap: 5px;
+}
+
+.vt-theme-swatches span {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.35);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+
+/* "Applied" badge */
+.vt-theme-active-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--mobile-accent, #a78bfa);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* Info section */
+.vt-theme-info {
+  padding: 12px 14px 8px;
+}
+
+.vt-theme-name {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--mobile-text, #f7f7fc);
+}
+
+.vt-theme-author {
+  margin: 3px 0 0;
+  font-size: 11px;
+  color: var(--mobile-muted, #a5a5bb);
+}
+
+.vt-theme-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.vt-theme-tag {
+  padding: 3px 9px;
+  border: 1px solid var(--mobile-border, rgba(255,255,255,0.1));
+  border-radius: 999px;
+  font-size: 10px;
+  color: var(--mobile-muted, #a5a5bb);
+  background: rgba(255,255,255,0.04);
+}
+
+/* Actions */
+.vt-theme-actions {
+  padding: 0 14px 14px;
+}
+
+.vt-theme-btn {
+  width: 100%;
+  min-height: 42px;
+  border: none;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 150ms ease, opacity 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.vt-theme-btn:active { transform: scale(0.97); }
+
+.vt-theme-btn-apply {
+  color: #fff;
+  background: linear-gradient(100deg, #7c3aed, #a855f7 55%, #ec4899);
+  box-shadow: 0 4px 16px rgba(139,92,246,0.3);
+}
+
+.vt-theme-btn-remove {
+  color: var(--mobile-muted, #a5a5bb);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--mobile-border, rgba(255,255,255,0.1));
+}
+
+.vt-theme-invalid {
+  margin: 0;
+  padding: 10px 0;
+  color: #fca5a5;
+  font-size: 11px;
+  text-align: center;
+}

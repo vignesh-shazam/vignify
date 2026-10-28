@@ -1,0 +1,21 @@
+{
+  "name": "@vignify/supabase",
+  "version": "0.1.0",
+  "private": true,
+  "exports": {
+    "./client": "./src/clients/client.ts",
+    "./server": "./src/clients/server.ts",
+    "./mobile": "./src/clients/mobile.ts"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.118.0"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "next": "16.4.2"
+  },
+  "peerDependencies": {
+    "next": ">=16"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "@vignify/ui",
+  "version": "0.1.0",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts",
+    "./styles": "./src/styles/index.css"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "react": "19.3.0",
+    "@types/react": "^19"
+  },
+  "peerDependencies": {
+    "react": ">=19"
+  }
+}

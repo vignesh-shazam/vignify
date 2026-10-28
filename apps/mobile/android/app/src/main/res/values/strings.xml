@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Vigniti</string>
+    <string name="title_activity_main">Vigniti</string>
+    <string name="package_name">com.vignify.app</string>
+    <string name="custom_url_scheme">com.vignify.app</string>
+</resources>
